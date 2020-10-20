@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="../css/login/loginstyle.css">
+    <link rel="shortcut icon" href="../img/login/ico/favicon.png">
+</head>
+<body>
+    <section>
+        
+        <!-- Login -->
+
+        <div class="container">
+            <div class="user singinBx">
+                <div class="imgBx"><img src="../img/login/login.jpg" alt=""></div>
+                <div class="formBx">
+                    <form action="">
+                        <h2>Login</h2>
+                        <input type="text" name="" placeholder="User name">
+                        <input type="password" name="" placeholder="Password">
+                        <input type="submit" name="" value="Login">
+                        <p class="signup">No account？<a href="#" onclick="topggleForm();">Create an account</a></p>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Registration -->
+
+            <div class="user singupBx">
+                <div class="formBx">
+                    <form action="">
+                        <h2>Create an account</h2>
+                        <input type="text" name="" placeholder="User name">
+                        <input type="email" name="" placeholder="Email">
+                        <input type="password" name="" placeholder="Password">
+                        <input type="password" name="" placeholder="Confirm password">
+                        <input type="submit" name="" value="Create">
+                        <p class="signup">Already have an account？<a href="#" onclick="topggleForm();">Login</a></p>
+                    </form>
+                </div>
+                <div class="imgBx"><img src="../img/login/Registration.jpg" alt=""></div>
+            </div>
+
+        </div>
+    </section>
+    <script type="text/javascript">
+        function topggleForm(){
+            var container = document.querySelector('.container');
+            container.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
