@@ -1,0 +1,4 @@
+Download the src files to a folder on your PC
+Open commnand terminal and navigate to that folder
+Type "npm start"
+It should run on your localhost:3000
