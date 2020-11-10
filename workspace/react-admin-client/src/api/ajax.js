@@ -17,3 +17,6 @@ export default function ajax(url,data={},type='GET'){
         })
     })
 }
+
+//login request interface
+//ajax('/login',{username:'TestUsername',password:'TestPassword'},POST).then()
