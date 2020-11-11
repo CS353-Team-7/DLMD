@@ -1,0 +1,132 @@
+body{
+  font-family: Arial, Helvetica, sans-serif; /*tipo de letra que usare*/
+}
+
+*{
+  box-sizing: content-box; /*Adapto el cuadrado donde esta metida toda la informacion (Para que no quede tanto margen sin uso)*/
+}
+
+/*Estilo de los inputs*/
+/*acomodo la parte de los textos de las casillas*/
+input[type=text], select, textarea{
+
+  width:100%; /*ocupar todo el espacio dentro del cuadro*/
+  padding: 12px; /*anchura de los cuadrados de los textos*/
+  border: 0.5px solid #ccc; /*le pongo una linea a los cuadradosde texto de color gris*/
+  margin-top:6px; /*cuanto espacio se separan los cuadros de texto del nombre de arriba*/
+  margin-bottom:16px; /*cuanto se separa el texto del cuadro de texto de arriba*/
+  resize: vertical; /*acomoda la imagen*/
+}
+
+/*le pongo color, altura y anchura al boton de submit*/
+input[type=submit]{
+  background-color: #0000FF; /*define el color que hay dentro de la caja de submit*/
+  color: white; /*define el color de la letra dentro de la caja de submit*/
+  padding:10px 20px; /*define la anchura y el largo de la caja de submit respectivamente*/
+  border: none; /*define el borde del cuadro(se mide en %)*/
+  cursor: pointer; /*para que puedas submit las cosas y no te error*/
+}
+
+/*Cuando me paro sobre el boton de submit, cambia de color*/
+input[type=submit]:hover{
+  background-color: #00008B; /*diferencia cuando te paras sobre submit cambiando de color*/
+}
+
+img{
+  background-color: #000000; /*decido el color que quiero que tenga el fondo de las imagenes*/
+}
+/*Cabecera donde esta el titulo de la pagina*/
+header{
+/*  background: #FFF8DC; /*Decido el colo que quiero que tenga el fondo de la cabecera*/
+  width: 100%;
+  background-image: url("./img/plants2.png");
+  background-size: 100%;
+  background-position: center;
+  height:400px
+  padding:20px
+  padding-top: 20px; /*margen de arriba del titulo*/
+  min-height: 150px;/*la altura que quiero que tenga la cabecera*/
+}
+
+/*cabecera (pongo el tamano y el color de o que se encuentra dentro del a (about, contact us))*/
+header a{
+  color: #000000; /*elijo el color negro para el about...*/
+  text-decoration: none; /*no quiero ninguna decoracion en el texto*/
+  font-size: 16px; /*defino el tamano de la letra del titulo*/
+}
+
+header ul{
+  margin:0;
+  padding:0;
+}
+/*caracteristicas para mover los links*/
+header li{
+  float:right; /*movemos a la derecha los links*/
+  display:inline;/*los ponemos todos en linea en vez de en columna*/
+  padding: 0 20px 0 20px; /*margen de arriba, derecha, abajo, izquierda*/
+}
+/*pongo el titulo de la cabecera centrado*/
+header #branding h1{
+  text-align: center; /*Alineo el texto al centro*/
+}
+
+header nav{
+  float: right; /*Mueve los links (sign up, login..)*/
+  /*background: none;*/
+}
+/*para cambiar de color los link cuando te paras sobre ellos*/
+header a:hover{
+  color: #708090;
+}
+
+/*Estilo e la seccion contact*/
+body #contact{
+  border-radius:5px; /*Para poner la forma del cuadrado(mas o menos redonda las esquinas)*/
+  background-color: #D3D3D3; /*coloca el color gris como fondo del cuadrado*/
+  padding: 10px; /*el margen dentro del cuadrado*/
+  border: 20px;
+  width: 550px; /*Define la ancura del cuadro gris de fondo*/
+}
+body #contact h2{
+  text-align: left; /*Alineo el texto al centro*/
+  padding-top: 30px; /*margen de arriba del titulo*/
+  padding-left: 180px; /*Da un margen a la izquierda del titulo Get in Touch*/
+}
+
+/*Se encarga del texto dentro del cuadro gris*/
+.column{
+  float: left; /*Pongo el texto y los cuadros de texto a la izquierda*/
+  width:85%; /*Define la longitud que quiero que tengan los cuadros de texto*/
+  margin-top: 6px; /*Defino la altura a la que quiero que empieze el texto (First Name)*/
+  padding: 20px; /*Define el margen del texto y los cuadrados de texto dentro del cuadrado gris*/
+}
+
+/*Colocando este codigo hago que se cree el cuadro donde quiero y el footer se queda abajo*/
+.row:after{
+  content: "";
+  display: table;
+  clear: both; /*para pasar el footer abajo y tener en el medio las casillas*/
+}
+
+/*Cuando hacemos pequena la pag (menos de 600px) hago que las dos columnas
+se conviertan en una poniendo las cosas unas encimas de otras en vez de unas al lado de otras*/
+@media screen and (max-width: 600px){
+  .column, input[type=submit]{
+    width:100%;
+    margin-top: 0;
+  }
+}
+
+body textarea{
+  height: 170px; /*Poner el cuadrado de texto de mensaje mas alto*/
+}
+
+
+body footer{
+  padding-top: 20px; /*margen de arriba del titulo*/
+  min-height: 60px; /*Altura que quiero que tenga el cuadrado negro del footer*/
+  background: #000000; /*Color del fondo*/
+  color: white; /*Color de la letra*/
+  text-align: center; /*Quiero que el texto vaya centrado*/
+  margin-top: 20px; /*Margen que deja entre el body y el footer*/
+}
