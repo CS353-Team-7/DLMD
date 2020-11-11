@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- made in Google Chrome-->
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Plant Calendar</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" />
+    <link rel='stylesheet' type='text/css' media='screen' href='calendar.css'>
+    </script>
+</head>
+
+<body>  
+    <div class="container">
+        <h1>Plant Calendar</h1>
+        <!-- Calender container -->
+        <div id="container">
+            <!-- Calendar -->
+            <div id="calendar">
+              <!-- Month and Arrows-->
+              <div id="month">
+                <h3></h3>
+                <a id="angle_up" href="#1_9_2019"><i class="fa fa-angle-up"></i></a>
+                <a id="angle_down" href="#1_10_2019"><i class="fa fa-angle-down"></i></a>
+              </div>
+              <!-- Days of Week -->
+              <div id="head">
+                <p>Sun</p>
+                <p>Mon</p>
+                <p>Tue</p>
+                <p>Wed</p>
+                <p>Thu</p>
+                <p>Fri</p>
+                <p>Sat</p>
+              </div>
+              <!-- Date Tiles -->
+              <div id="dates"></div>
+            </div>
+            <div id="sidebar">
+                <h2 class="sidebar-title">Plants for the day</h2>
+                <div class="sidebar-body">
+
+                </div>
+                <div class="sidebar-footer"></div>
+            </div>
+          </div>
+
+        <div class="btn-container">
+            <!-- <button id="add_plant">Add Plant</button> -->
+            <h2 class="search-for-plant">Search for Plant</h2>
+            <form id="search_for_plant" method="POST">
+                <input id="input_for_plant" name="input_for_plant" type="text" />
+                <label for="input_for_plant">Enter plant name...</label>
+                <button class="btn">Submit <span class="submit-arrow"><i class="fa fa-search" aria-hidden="true"></i></span></button>
+            </form>
+        </div>
+        <!-- show plants button, when clicked will show all plants, x beside each plant for deletion, possible clear button\\-->
+        <!-- <button id="reset_data">Reset Data</button> -->
+
+        <div class="results-container"></div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src='calendar.js'></script>
+</body>  
+
+</html>
