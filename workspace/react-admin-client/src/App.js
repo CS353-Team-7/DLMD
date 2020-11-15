@@ -16,13 +16,14 @@ export default class App extends Component{
             //Home page:router
             <BrowserRouter>
                 <Switch> {/*Only match one of them*/}
-
                     <Route path='/login' component={Login}></Route>
-                    <Route path='/' component={homepage}></Route>
+                    <Route path='/login' component={Login}></Route>
                     <Route path='/personal' component={Personal}></Route>
+                    <Route path='/' component={homepage}></Route>
                 </Switch>
 
             </BrowserRouter>
         )
          }
 }
+
