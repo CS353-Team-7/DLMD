@@ -16,13 +16,15 @@ import {
     Input,
     Select,
     DatePicker,
-    Space} from 'antd';
+    Space, message
+} from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import RegistrationForm from "./r";
 import loginjpg from './images/login1.jpg'
 import Demo from './l'
 export default class Login extends Component{
+
     state = { visible: false };
 
     showDrawer = () => {

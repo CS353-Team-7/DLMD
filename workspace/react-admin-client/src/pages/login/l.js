@@ -1,62 +1,74 @@
-import { Form, Input,Drawer, Button, Checkbox } from 'antd';
-import RegistrationForm from "./r";
+import {Form, Input, Drawer, Button, Checkbox, message} from 'antd';
+import React,{Component} from "react";
 import DrawerForm from './registrationDrawer'
 import RegistrationDrawer from "./registrationDrawer";
-const layout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
-};
-const tailLayout = {
-    wrapperCol: { offset: 8, span: 16 },
-};
+import fire from "../../api/commonFirebase";
+import { withRouter } from 'react-router-dom';
 
-const Demo = () => {
-    const onFinish = values => {
-        console.log('Success:', values);
+
+class  Demo extends Component{
+     layout = {
+        labelCol: { span: 8 },
+        wrapperCol: { span: 16 },
     };
 
-    const onFinishFailed = errorInfo => {
+    tailLayout = {
+        wrapperCol: { offset: 8, span: 16 },
+    };
+     onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
-
-    return (
-        <Form
-            {...layout}
-            name="basic"
-            initialValues={{ remember: true }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-        >
-            <Form.Item
-                label="Username"
-                name="username"
-                rules={[{ required: true, message: 'Please input your username!' }]}
+     onFinish = (e) => {
+         message.success(e.username+"test!"+e.password)
+         withRouter(Demo)
+         fire.auth().signInWithEmailAndPassword(e.username,e.password).then((u)=>{
+             message.success("success!");
+             this.props.history.replace('/Personal');
+         }).catch((error)=>{
+             message.error("username or password erro :"+error)
+         })
+    };
+    render(){
+        return(
+            <Form
+                {...this.layout}
+                name="basic"
+                initialValues={{ remember: true }}
+                onFinish={this.onFinish}
+                onFinishFailed={this.onFinishFailed}
             >
-                <Input />
-            </Form.Item>
+                <Form.Item
+                    label="Username"
+                    name="username"
+                    rules={[{ required: true, message: 'Please input your username!' }]}
+                >
+                    <Input />
+                </Form.Item>
 
-            <Form.Item
-                label="Password"
-                name="password"
-                rules={[{ required: true, message: 'Please input your password!' }]}
-            >
-                <Input.Password />
-            </Form.Item>
+                <Form.Item
+                    label="Password"
+                    name="password"
+                    rules={[{ required: true, message: 'Please input your password!' }]}
+                >
+                    <Input.Password />
+                </Form.Item>
 
-            <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-                <Checkbox>Remember me</Checkbox>
-            </Form.Item>
+                <Form.Item {...this.tailLayout} name="remember" valuePropName="checked">
+                    <Checkbox>Remember me</Checkbox>
+                </Form.Item>
 
-            <Form.Item {...tailLayout}>
-                <Button type="primary" htmlType="submit">
-                    Submit
-                </Button>
-                <> </>
-                <DrawerForm/>
-            </Form.Item>
+                <Form.Item {...this.tailLayout}>
+                    <Button type="primary" htmlType="submit">
+                        Submit
+                    </Button>
+                    <> </>
+                    <DrawerForm/>
+                </Form.Item>
 
-        </Form>
-    );
-};
+            </Form>
+        )
+    }
+}
 
-export default Demo;
+export default withRouter(Demo);
+
