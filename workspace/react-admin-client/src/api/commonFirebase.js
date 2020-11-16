@@ -1,13 +1,13 @@
 import firebase from "firebase";
 var firebaseConfig = {
-    apiKey: "AIzaSyDtqNoM2bF8_Dyj1O9Zlp94hXzljszK6zw",
-    authDomain: "don-t-let-me-die.firebaseapp.com",
-    databaseURL: "https://don-t-let-me-die.firebaseio.com",
-    projectId: "don-t-let-me-die",
-    storageBucket: "don-t-let-me-die.appspot.com",
-    messagingSenderId: "430686717248",
-    appId: "1:430686717248:web:1a5ff798a609ef67e3e6a5",
-    measurementId: "G-DG9PJVNRRK"
+    apiKey: "AIzaSyCWcZetRcxwjGgZBQCFCzKW3c7RjXPQsu0",
+    authDomain: "cs385-team07-don-t-let-me-die.firebaseapp.com",
+    databaseURL: "https://cs385-team07-don-t-let-me-die.firebaseio.com",
+    projectId: "cs385-team07-don-t-let-me-die",
+    storageBucket: "cs385-team07-don-t-let-me-die.appspot.com",
+    messagingSenderId: "832423928995",
+    appId: "1:832423928995:web:9ca34c01fc199786188b16",
+    measurementId: "G-6FRHG613NM"
 };
 // Initialize Firebase
 const fire = firebase.initializeApp(firebaseConfig);
