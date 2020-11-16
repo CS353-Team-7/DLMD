@@ -3,7 +3,7 @@
 routing component of Login page
  */
 import React,{Component,Option} from "react";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import styles from './loginstyle.css'
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
@@ -23,6 +23,7 @@ import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import RegistrationForm from "./r";
 import loginjpg from './images/login1.jpg'
 import Demo from './l'
+import memoryUtils from "../../utils/memoryUtils";
 export default class Login extends Component{
 
     state = { visible: false };
@@ -43,7 +44,15 @@ export default class Login extends Component{
         console.log(container);
         container.classList.toggle('active');
     }
+
     render() {
+        const user = memoryUtils.user;
+
+        //Check whether to log in
+        if(user.username){
+            message.success("Automatic login successful !")
+            return <Redirect to = '/personal'/>
+        }
 
         return (
             <div className="login">

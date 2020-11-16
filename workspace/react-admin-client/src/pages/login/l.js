@@ -4,8 +4,8 @@ import DrawerForm from './registrationDrawer'
 import RegistrationDrawer from "./registrationDrawer";
 import fire from "../../api/commonFirebase";
 import { withRouter } from 'react-router-dom';
-
-
+import memoryUtils from "../../utils/memoryUtils";
+import storageUtils from "../../utils/storageUtils";
 class  Demo extends Component{
      layout = {
         labelCol: { span: 8 },
@@ -19,10 +19,13 @@ class  Demo extends Component{
         console.log('Failed:', errorInfo);
     };
      onFinish = (e) => {
-         message.success(e.username+"test!"+e.password)
          withRouter(Demo)
          fire.auth().signInWithEmailAndPassword(e.username,e.password).then((u)=>{
-             message.success("success!");
+             memoryUtils.user = e//Store the username in memory
+             storageUtils.saveUser(e)//store local
+             message.success("success!"+ memoryUtils.user.username);
+
+
              this.props.history.replace('/Personal');
          }).catch((error)=>{
              message.error("username or password erro :"+error)
