@@ -1,0 +1,20 @@
+img {
+  cursor: pointer;
+  padding: 10px;
+}
+/*this styles the add button*/
+#addPlant {
+  padding: 12 12;
+  font-size: 16px;
+  background-color: #f5ce2d;
+  border: none;
+  border-radius: 43.5px;
+  padding: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin-top: 50px;
+  font-size: 15px;
+}
+.thumbnail{
+  width: 240px;
+  height: 240px;
+}
