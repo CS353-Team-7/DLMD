@@ -3,12 +3,12 @@ routing component of personal page
  */
 import React,{Component} from "react";
 import {Redirect,Link,Route,Switch} from 'react-router-dom'
-import memoryUtils from "../../utils/memoryUtils";
 
-import {message} from "antd";
+import {message,Image,Button,Modal} from "antd";
 
 import { Layout, Menu, Breadcrumb } from 'antd';
 import {
+   ExclamationCircleOutlined ,
     SearchOutlined,
     CalendarOutlined,
     DesktopOutlined,
@@ -27,19 +27,45 @@ import WateringMainView from "../wateringmainview/wateringmainview";
 import WateringCardsView from "../wateringcardsview/wateringcardsview";
 import Search from "../search/search";
 import AddPlantCard from "../addplantcard/addplantcard";
+import memoryUtils from "../../utils/memoryUtils";
+import storageUtils from "../../utils/storageUtils";
+import { withRouter } from 'react-router-dom';
+
+const { confirm } = Modal;
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
-export default class Personal extends Component{
+ class Personal extends Component{
     state = {
         collapsed: false,
-    };
 
+    };
+      this = this
     onCollapse = collapsed => {
         console.log(collapsed);
         this.setState({ collapsed });
     };
-
+      showDeleteConfirm =()=> {
+         confirm({
+             title: 'Warning notices',
+             icon: <ExclamationCircleOutlined />,
+             content: 'Are you really ready to log out?',
+             okText: 'Yes',
+             okType: 'danger',
+             cancelText: 'No',
+             onOk:()=> {
+                 console.log('OK');
+                 storageUtils.removeUser();
+                 memoryUtils.user={};
+                 message.success("log out success!");
+                 this.props.history.replace('/');
+             },
+             onCancel() {
+                 console.log('Cancel');
+             },
+         });
+     }
     render() {
+
         const user = memoryUtils.user;
         //Check whether to log in
         if(!user.username){
@@ -53,7 +79,7 @@ export default class Personal extends Component{
 
 
                 <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse} width={300}>
-                    <div className="logo" style={{ minHeight: '15vh' }}>asd</div>
+                    <div className="logo" style={{ minHeight: '15vh' }}> </div>
                     <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
                         <Menu.Item key="1" icon={<PieChartOutlined />} >
                             reserved
@@ -78,7 +104,11 @@ export default class Personal extends Component{
                     </Menu>
                 </Sider>
                 <Layout className="site-layout">
-                    <Header className="site-layout-background" style={{ margin: '0 16px' }} />
+                    <Header className="site-layout-background" style={{ margin: '0 16px' }}>
+                        <Button onClick={this.showDeleteConfirm} type="dashed">Log out</Button>
+
+                    </Header>
+
                     <Content style={{ margin: '0 16px' }}>
                         <div>
                             <Switch>
@@ -100,3 +130,4 @@ export default class Personal extends Component{
         )
     }
 }
+export default withRouter(Personal);
