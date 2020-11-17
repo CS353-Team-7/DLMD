@@ -13,7 +13,7 @@ export default class PersonalInformation extends Component{
                 <Descriptions title=" &nbsp;  &nbsp; &nbsp;User Info" bordered>
                     <Descriptions.Item label="UserName">{user.username}</Descriptions.Item>
                     <Descriptions.Item label="Telephone">Prepaid</Descriptions.Item>
-                    
+
                     <Descriptions.Item label="Remark">empty</Descriptions.Item>
                     <Descriptions.Item label="Address" span={2}>
                         MAYNOOTH UNIVERSITY MAYNOOTH CO. KILDARE
