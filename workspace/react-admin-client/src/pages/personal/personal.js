@@ -30,6 +30,9 @@ import AddPlantCard from "../addplantcard/addplantcard";
 import memoryUtils from "../../utils/memoryUtils";
 import storageUtils from "../../utils/storageUtils";
 import { withRouter } from 'react-router-dom';
+import PlantListComponent from '../plantList/plantList';
+
+
 
 const { confirm } = Modal;
 const { Header, Content, Footer, Sider } = Layout;
@@ -82,7 +85,7 @@ const { SubMenu } = Menu;
                     <div className="logo" style={{ minHeight: '15vh' }}> </div>
                     <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
                         <Menu.Item key="1" icon={<PieChartOutlined />} >
-                            reserved
+                            <Link to ='/personal/plantList'>Plant list</Link>
                         </Menu.Item>
                         <SubMenu key="sub1" icon={<UserOutlined />} title={user.username} >
                             <Menu.Item key="3"> <Link to ='/personal/personalinformation'>Personal information</Link></Menu.Item>
@@ -120,6 +123,7 @@ const { SubMenu } = Menu;
                                 <Route path='/personal/search' component={Search}/>
                                 <Route path='/personal/wateringmainview' component={WateringMainView}/>
                                 <Route path='/personal/wateringcardsview' component={WateringCardsView}/>
+                                <Route path='/personal/plantList' component={PlantListComponent}/>
                             </Switch>
                         </div>
 
