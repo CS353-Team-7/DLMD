@@ -2,9 +2,8 @@ import React, {Component} from 'react';
 import { Card ,Rate ,Divider,Tag } from 'antd';
 import plantTest from './image/plantTest.jpg';
 import {
-    PushpinOutlined
+    EnvironmentTwoTone
 } from '@ant-design/icons';
-
 
 const { Meta } = Card;
 const desc = ['terrible', 'bad', 'aaa', 'good', 'wonderful'];
@@ -30,7 +29,7 @@ export default class PlantCards extends Component{
             >
                 <Meta title="My Plant" description="This is description about plant" />
                 <Divider />
-                <Tag icon={< PushpinOutlined  ></PushpinOutlined>} color="processing">
+                <Tag icon={< EnvironmentTwoTone  ></EnvironmentTwoTone>} color="processing">
                     corridor
                 </Tag>
                 <span>
