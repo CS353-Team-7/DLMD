@@ -85,7 +85,7 @@ const { SubMenu } = Menu;
                     <div className="logo" style={{ minHeight: '15vh' }}> </div>
                     <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
                         <Menu.Item key="1" icon={<PieChartOutlined />} >
-                            <Link to ='/personal/plantList'>Plant list</Link>
+                            null
                         </Menu.Item>
                         <SubMenu key="sub1" icon={<UserOutlined />} title={user.username} >
                             <Menu.Item key="3"> <Link to ='/personal/personalinformation'>Personal information</Link></Menu.Item>
@@ -102,7 +102,7 @@ const { SubMenu } = Menu;
                             <Menu.Item key="8"><Link to ='/personal/wateringcardsview'>Card View</Link></Menu.Item>
                         </SubMenu>
                         <Menu.Item key="9" icon={<SearchOutlined />}>
-                            <Link to ='/personal/search'>Search</Link>
+                            <Link to ='/personal/plantList'>Search</Link>
                         </Menu.Item>
                     </Menu>
                 </Sider>
@@ -124,6 +124,7 @@ const { SubMenu } = Menu;
                                 <Route path='/personal/wateringmainview' component={WateringMainView}/>
                                 <Route path='/personal/wateringcardsview' component={WateringCardsView}/>
                                 <Route path='/personal/plantList' component={PlantListComponent}/>
+                                <Redirect to='/personal/plantcards'/>
                             </Switch>
                         </div>
 
