@@ -2,6 +2,33 @@ import React from 'react';
 import Modal from 'react-awesome-modal';
 import './Modal.css';
 import './plantList.css'
+import firebase from "firebase/app";
+import "firebase/auth";
+
+
+const firebaseConfig = {
+        apiKey: "AIzaSyDtqNoM2bF8_Dyj1O9Zlp94hXzljszK6zw",
+        authDomain: "don-t-let-me-die.firebaseapp.com",
+        databaseURL: "https://don-t-let-me-die.firebaseio.com",
+        projectId: "don-t-let-me-die",
+        appId: "1:430686717248:web:1a5ff798a609ef67e3e6a5",
+        measurementId: "G-DG9PJVNRRK"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
+  var user = firebase.auth().currentUser;
+  var userID;
+
+  //Checks a user is signed in
+  if (user) {
+    console.log("User signed in");
+    //Gets the signed in user's ID
+    userID = user.uid;
+  } else {
+    console.log("No user signed in");
+  }
+
 
 
 
@@ -41,7 +68,8 @@ class PlantListComponent extends React.Component
             visible:false,
             num:0,
             value: '',
-            changed:false
+            changed:false,
+            users : []
         };
         this.plantFilterOnChange = this.plantFilterOnChange.bind(this);
     }
@@ -66,11 +94,9 @@ plantFilterOnChange(event) {
     });
 }
 
-
-   
-    componentDidMount() 
-    {
-        fetch("https://don-t-let-me-die.firebaseio.com/data.json")
+getPlantData()
+{
+    fetch("https://don-t-let-me-die.firebaseio.com/data.json")
         .then(res => res.json())
         .then(
             (result) => {
@@ -87,10 +113,35 @@ plantFilterOnChange(event) {
             }
         
         )
+}
 
-        
+postUserData(input)
+{
+    var plant = input;
+
+    //Assuming userID is already added?
+    var userURL = "https://don-t-let-me-die.firebaseio.com/users.json/" + userID;
 
 
+        fetch("https://don-t-let-me-die.firebaseio.com/users.json", {
+  method: 'POST',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+      //Could also just set an ID as an array in the DB, add the plants to each one (more efficient)
+    ID: "test", // REPLACE "test" WITH userID
+    UserPlant: plant
+  })
+})
+}
+
+
+   
+    componentDidMount() 
+    {
+        this.getPlantData();
         
 //More plant info available via different API call, but requires proxy server if the call is made through code due to CORS
         /*
@@ -119,8 +170,9 @@ plantFilterOnChange(event) {
 }
 
 
+
     render(){
-        const { error, isLoaded, items, num, value, changed } = this.state;
+        const { error, isLoaded, items, num, value, changed,users } = this.state;
         if(error) {
             return <div> Error: {error.message} </div>;
         }
@@ -128,6 +180,7 @@ plantFilterOnChange(event) {
             return <div> Loading...</div>;
         }
         else{
+                console.log(users);
 
                 if(changed)
                 {
@@ -224,13 +277,13 @@ plantFilterOnChange(event) {
                     </div>
                   </div>
                     
-                    <Modal visible={this.state.visible} width="400" height="300" effect="fadeInUp" background-color = "grey" onClickAway={() => this.closeModal()}>
+                    <Modal visible={this.state.visible} width="400" height="300" effect="fadeInUp" background-color="red" onClickAway={() => this.closeModal()}>
                     <div className = "Modal">
-                        <h4 style ={{color:"#38a6a8"}}>{items[num].common_name}</h4>
+                        <h4 style ={{color:"red"}}>{items[num].common_name}</h4>
                         <text style = {{color:"black"}}>Scientific Name: {items[num].scientific_name}<br></br></text>
                         <text style = {{color:"black"}}>Family: {items[num].family_common_name}<br></br></text>
                     </div>
-                    <button id = "addPlant">Add to Collection</button>
+                    <button id = "addPlant" onClick={()=>this.postUserData(items[num].common_name)}>Add to Collection</button>
                         
                     </Modal>
 
