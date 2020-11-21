@@ -135,6 +135,7 @@ postUserData(input)
     UserPlant: plant
   })
 })
+        alert(plant + " has been added to your Collection!");
 }
 
 
