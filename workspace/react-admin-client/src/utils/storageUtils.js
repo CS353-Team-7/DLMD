@@ -1,6 +1,4 @@
 /*
-local data  //"proxy": "http://localhost:5000"
-
 * */
 import store from 'store'
 const USER_KEY = 'user_key'

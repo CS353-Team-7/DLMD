@@ -7,23 +7,11 @@ import {Link, Redirect} from "react-router-dom";
 import styles from './loginstyle.css'
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
-import {
-    Drawer,
-    Form,
-    Button,
-    Col,
-    Row,
-    Input,
-    Select,
-    DatePicker,
-    Space, message
-} from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
-import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
-import RegistrationForm from "./r";
+import { message} from 'antd';
 import loginjpg from './images/login1.jpg'
 import Demo from './l'
 import memoryUtils from "../../utils/memoryUtils";
+import storageUtils from "../../utils/storageUtils";
 export default class Login extends Component{
 
     state = { visible: false };
@@ -46,10 +34,10 @@ export default class Login extends Component{
     }
 
     render() {
-        const user = memoryUtils.user;
 
+        const user = storageUtils.getUser();
         //Check whether to log in
-        if(user.username){
+        if(user.email){
             message.success("Automatic login successful !")
             return <Redirect to = '/personal'/>
         }

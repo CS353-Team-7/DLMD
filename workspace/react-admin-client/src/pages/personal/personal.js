@@ -18,11 +18,10 @@ import {
     UserOutlined,
 } from '@ant-design/icons';
 import './personal.css'
-import Home from "../home/home";
 import PlantCalendar from "../plantcalendar/plantcalendar";
 import PersonalInformation from "../personalinformation/personalinformation";
 import PlantCards from "../plantcards/plantcards";
-import PlantCardsMainView from "../plantcardsmainview/plantcardsmainview";
+import myCollection from "../mycollection/mycollection";
 import WateringMainView from "../wateringmainview/wateringmainview";
 import WateringCardsView from "../wateringcardsview/wateringcardsview";
 import Search from "../search/search";
@@ -69,9 +68,9 @@ const { SubMenu } = Menu;
      }
     render() {
 
-        const user = memoryUtils.user;
+        const user = storageUtils.getUser();
         //Check whether to log in
-        if(!user.username){
+        if(!user.email){
             return <Redirect to = '/login'/>
         }
 
@@ -90,16 +89,16 @@ const { SubMenu } = Menu;
                         <SubMenu key="sub1" icon={<UserOutlined />} title={user.username} >
                             <Menu.Item key="3"> <Link to ='/personal/personalinformation'>Personal information</Link></Menu.Item>
                             <Menu.Item key="4"> <Link to ='/personal/plantcards'>Plant Cards</Link></Menu.Item>
-                            <Menu.Item key="5"> <Link to ='/personal/plantcardsmainview'>Main View</Link></Menu.Item>
+                            <Menu.Item key="5"> <Link to ='/personal/mycollection'>My collection of plants </Link></Menu.Item>
                             <Menu.Item key="6"> <Link to ='/personal/addplantcard'>Add plant card</Link></Menu.Item>
                         </SubMenu>
                         <Menu.Item key="2" icon={<CalendarOutlined />}>
                            <Link to ='/personal/plantcalendar'>Calendar</Link>
                         </Menu.Item>
 
-                        <SubMenu key="sub2" icon={<SearchOutlined />} title="Watering Schedule">
-                            <Menu.Item key="7"><Link to ='/personal/wateringmainview'>Main View</Link></Menu.Item>
-                            <Menu.Item key="8"><Link to ='/personal/wateringcardsview'>Card View</Link></Menu.Item>
+                        <SubMenu key="sub2" icon={<SearchOutlined />} title="Test">
+                            <Menu.Item key="7"><Link to ='/personal/wateringmainview'>Test</Link></Menu.Item>
+                            <Menu.Item key="8"><Link to ='/personal/wateringcardsview'>Test</Link></Menu.Item>
                         </SubMenu>
                         <Menu.Item key="9" icon={<SearchOutlined />}>
                             <Link to ='/personal/plantList'>Search</Link>
@@ -117,7 +116,7 @@ const { SubMenu } = Menu;
                             <Switch>
                                 <Route path='/personal/plantcalendar' component={PlantCalendar}/>
                                 <Route path='/personal/plantcards' component={PlantCards}/>
-                                <Route path='/personal/plantcardsmainview' component={PlantCardsMainView}/>
+                                <Route path='/personal/mycollection' component={myCollection}/>
                                 <Route path='/personal/personalinformation' component={PersonalInformation}/>
                                 <Route path='/personal/addplantcard' component={AddPlantCard}/>
                                 <Route path='/personal/search' component={Search}/>
