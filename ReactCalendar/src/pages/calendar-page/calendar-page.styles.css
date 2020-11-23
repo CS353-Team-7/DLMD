@@ -1,0 +1,15 @@
+.calendar-page {
+    font-family: 'Hind Madurai', sans-serif;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--body-background-color);
+    color: white;
+}
+
+.calendar-title {
+    text-align: center;
+    margin: 0;
+    padding: 50px 0 20px 0;
+    font-weight: 400;
+}

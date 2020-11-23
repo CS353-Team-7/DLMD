@@ -1,0 +1,26 @@
+.navigation {
+    width: 100%;
+    background-color: var(--calendar-background-color);
+    padding: 20px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
+
+.navigation span {
+    font-size: 21px;
+    font-weight: 400;
+    margin: 0 0 0 20px;
+    display: block;
+    width: 175px;
+}
+
+.nav-button {
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.nav-button:hover {
+    color: var(--main-highlight);
+}

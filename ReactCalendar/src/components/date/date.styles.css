@@ -1,0 +1,23 @@
+.blacked-out {
+    color: rgba(255, 255, 255, .25);
+}
+
+.date-tile {
+    cursor: pointer;
+    transition: all .2s ease-in;
+}
+
+.date-tile:hover {
+    background-color: var(--sidebar-background-color) !important;
+}
+
+.selected {
+    background: var(--main-highlight);
+    background: var(--fortyFive-deg-gradient);
+    color: var(--dates-background-color);
+    font-weight: 500;
+}
+
+.selected:hover {
+    background-color: var(--main-highlight) !important;
+}
