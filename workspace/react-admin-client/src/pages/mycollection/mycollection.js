@@ -12,7 +12,16 @@ var data = [
 export default class myCollection extends Component{
 
    state = {
-        list:[]
+       loading:false,
+        list:[],
+    }
+    DeleteCollection =(user)=>{
+        this.setState({loading:true})
+        var Myuser = memoryUtils.user.username;
+        var ref = fire.database().ref("users/"+user._ID).remove()
+        this.queryCollectionPlant();
+        message.success("Delete success!:"+user.UserPlant)
+        this.setState({loading:false})
     }
     initColumns = () =>{
         this.columns = [
@@ -30,7 +39,7 @@ export default class myCollection extends Component{
                 dataIndex: '',
                 key: 'x',
                 width:300,
-                render: () => <Button>Delete</Button>,
+                render: (user) => <Button onClick={()=>this.DeleteCollection(user)}>Delete</Button>,
             },
 
         ];
@@ -46,32 +55,35 @@ export default class myCollection extends Component{
 
     queryCollectionPlant=()=>
     {
+        this.setState({loading:true})
         var user = memoryUtils.user.username;
         var ref = fire.database().ref("users").orderByChild("ID").equalTo(user).once("value",(data)=>{
 
             const value = data.val();
             const valuelist = [];
             for(let id in value) {
-                valuelist.push(value[id]);
+                valuelist.push({_ID:id,ID:value[id].ID,UserPlant:value[id].UserPlant});
             }
             console.log(valuelist);
             this.setState({list:valuelist})
             console.log(this.state.list);
         });
-
+        this.setState({loading:false})
 
     }
 
     render() {
-       const {list} = this.state
+       const {list,loading} = this.state
         const cardTitle ="My collection";
         return (
             <Card title={cardTitle} >
                 <Table
                     bordered = {true}
                     dataSource={list}
-                       columns={this.columns}
-                />;
+                    loading = {loading}
+                    columns={this.columns}
+                    pagination = {{defaultPageSize:4,showQuickJumper:true}}
+                />
             </Card>
         )
     }

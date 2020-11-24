@@ -30,7 +30,8 @@ import memoryUtils from "../../utils/memoryUtils";
 import storageUtils from "../../utils/storageUtils";
 import { withRouter } from 'react-router-dom';
 import PlantListComponent from '../plantList/plantList';
-
+import {formateDate} from "../../utils/dateUtils";
+import DateHeader from "../../components/date-header/date-header.component";
 
 
 const { confirm } = Modal;
@@ -39,7 +40,7 @@ const { SubMenu } = Menu;
  class Personal extends Component{
     state = {
         collapsed: false,
-
+        currentTime:formateDate(Date.now()),
     };
       this = this
     onCollapse = collapsed => {
@@ -71,8 +72,18 @@ const { SubMenu } = Menu;
              },
          });
      }
-    render() {
+     getTime=()=>{
+          setInterval(()=>{
+              const currentTime = formateDate(Date.now())
+              this.setState({currentTime})
+          },1000)
+     }
+     componentDidMount() {
+        this.getTime();
+     }
 
+     render() {
+        const{currentTime} = this.state
         const user = memoryUtils.user.username;
         console.log("per:"+user)
         //Check whether to log in
@@ -113,7 +124,11 @@ const { SubMenu } = Menu;
                 </Sider>
                 <Layout className="site-layout">
                     <Header className="site-layout-background" style={{ margin: '0 16px' }}>
-                        <Button onClick={this.showDeleteConfirm} type="dashed">Log out</Button>
+                        <div>
+                            <Button onClick={this.showDeleteConfirm} type="dashed">Log out</Button>
+                            <span> &ensp;   &ensp;   </span>
+                            <span style={{ right: '80px' }}>{currentTime}</span>
+                        </div>
 
                     </Header>
 
