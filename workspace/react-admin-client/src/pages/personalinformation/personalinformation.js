@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Badge, Descriptions, Divider} from "antd";
 import memoryUtils from "../../utils/memoryUtils";
-
+import DrawerForm from './informationdrawer'
 
 
 export default class PersonalInformation extends Component{
@@ -38,6 +38,7 @@ export default class PersonalInformation extends Component{
                         Test<br />
                     </Descriptions.Item>
                 </Descriptions>
+                <DrawerForm/>
             </div>
 
         )

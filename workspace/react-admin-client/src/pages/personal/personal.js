@@ -105,8 +105,9 @@ const { SubMenu } = Menu;
                         </Menu.Item>
                         <SubMenu key="sub1" icon={<UserOutlined />} title={user} >
                             <Menu.Item key="3"> <Link to ='/personal/personalinformation'>Personal information</Link></Menu.Item>
-                            <Menu.Item key="4"> <Link to ='/personal/plantcards'>Plant Cards</Link></Menu.Item>
                             <Menu.Item key="5"> <Link to ='/personal/mycollection'>My collection of plants </Link></Menu.Item>
+                            <Menu.Item key="4"> <Link to ='/personal/plantcards'>Plant Cards</Link></Menu.Item>
+
                             <Menu.Item key="6"> <Link to ='/personal/addplantcard'>Add plant card</Link></Menu.Item>
                         </SubMenu>
                         <Menu.Item key="2" icon={<CalendarOutlined />}>
