@@ -1,0 +1,184 @@
+.taskbar {
+    width: 15%;
+    height: 721px;
+    padding-right: 25px;
+    color: white;
+    background-color: transparent;
+    overflow-y: auto;
+    position: relative;
+}
+
+.taskbar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.taskbar::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.taskbar::-webkit-scrollbar-thumb {
+    background-color: var(--calendar-background-color);
+    border-radius: 100px;
+}
+
+.taskbar-header h2, .taskbar-header p {
+    margin-left: 25px;
+}
+
+.taskbar-header h2 {
+    font-weight: 400;
+    font-size: 21px;
+}
+
+.taskbar-header p {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 900;
+    background: var(--main-highlight);
+    background: var(--ninety-deg-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.taskbar-plant {
+    display: flex;
+    margin: 0 0 20px 25px;
+    border-radius: 10px;
+    filter: grayscale(100%);
+    transition: all .2s ease-in;
+    cursor: pointer;
+}
+
+.taskbar-plant:hover {
+    transform: scale(1.05);
+    filter: grayscale(0);
+    -webkit-box-shadow: 0px 0px 14px 1px rgba(0,0,0,0.05), 0px 2px 2px 5px rgba(0,0,0,0.05), 0px 5px 15px 5px rgba(0,0,0,0.1), 0px 10px 6px 23px rgba(0,0,0,0.05);
+    box-shadow: 0px 0px 14px 1px rgba(0,0,0,0.05), 0px 2px 2px 5px rgba(0,0,0,0.05), 0px 5px 15px 5px rgba(0,0,0,0.1), 0px 10px 6px 23px rgba(0,0,0,0.05);
+}
+
+.taskbar-plant .plant-image {
+    background: url('https://www.telegraph.co.uk/multimedia/archive/03397/Close_up_daisy_Ala_3397447d.jpg');
+    width: 30%;
+    height: 100px;
+    border-radius: 10px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.taskbar-plant .plant-content {
+    line-height: 0;
+    margin: 0 0 0 20px;
+}
+
+.taskbar-plant .plant-content .plant-title {
+    font-weight: 400;
+}
+
+.taskbar-plant .plant-content .plant-scientific {
+    opacity: .5;
+}
+
+
+.plant-watering {
+    display: block;
+    width: 21px;
+    height: 21px;
+    fill: white;
+    opacity: .5;
+    position: absolute;
+    bottom: 10px;
+    transform: scale(0);
+    transition: all .2s ease-in;
+}
+
+.remove-plant {
+    font-size: 14px;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    opacity: .5;
+    transform: scale(0);
+    transition: all .2s ease-in;
+}
+
+.plant-watering:hover, .remove-plant:hover {
+    opacity: 1;
+}
+
+.remove-plant:hover {
+    color: #ff0d51;
+}
+
+.plant-watering g g:last-child{
+    transition: all .2s ease-in;
+}
+
+.plant-watering g g:last-child:hover{
+    transform: rotate(10deg) translateX(5px);
+}
+
+.taskbar-plant:hover > .plant-content > .plant-watering, .taskbar-plant:hover > .plant-content > .remove-plant {
+    transform: scale(1);
+}
+
+
+.remove-plant-modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    background-color: rgba(0, 0, 0, .75);
+}
+
+.remove-plant-modal {
+    width: 25%;
+    height: 25%;
+    background-color: var(--sidebar-background-color);
+    padding: 25px 40px;
+    border-radius: 10px;
+    color: white;
+    position: fixed;
+    z-index: 100;
+    left: 35%;
+    top: 35%;
+    text-align: center;
+    -webkit-box-shadow: 0px 0px 50px 50px rgba(0,0,0,0.25);
+    box-shadow: 0px 0px 50px 50px rgba(0,0,0,0.25);
+}
+
+.remove-plant-modal h2 {
+    font-weight: 300;
+}
+
+.remove-plant-modal button {
+    font-family: 'Hind Madurai', sans-serif;
+    padding: 10px 30px;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--body-background-color);
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0 25px;
+    transition: all .2s ease-in;
+}
+
+.remove-plant-modal button:hover {
+    transform: scale(1.025);
+    -webkit-box-shadow: 0px 0px 14px 1px rgba(0,0,0,0.05), 0px 2px 2px 5px rgba(0,0,0,0.05), 0px 5px 15px 5px rgba(0,0,0,0.1), 0px 10px 6px 23px rgba(0,0,0,0.05);
+    box-shadow: 0px 0px 14px 1px rgba(0,0,0,0.05), 0px 2px 2px 5px rgba(0,0,0,0.05), 0px 5px 15px 5px rgba(0,0,0,0.1), 0px 10px 6px 23px rgba(0,0,0,0.05);
+}
+
+.remove-plant-modal .remove-plant-btn {
+    background-color: #ff0d51;
+    border: 1px solid #ff0d51;
+}
+
+.remove-plant-modal .cancel-remove-btn {
+    background-color: var(--main-highlight);
+    border: 1px solid var(--main-highlight);
+}
+
