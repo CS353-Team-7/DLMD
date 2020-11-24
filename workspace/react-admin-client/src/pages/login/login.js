@@ -4,14 +4,12 @@ routing component of Login page
  */
 import React,{Component,Option} from "react";
 import {Link, Redirect} from "react-router-dom";
-import styles from './loginstyle.css'
-import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import { message} from 'antd';
 import loginjpg from './images/login1.jpg'
 import Demo from './l'
 import memoryUtils from "../../utils/memoryUtils";
-import storageUtils from "../../utils/storageUtils";
+import '../login/loginstyle.css'
 export default class Login extends Component{
 
     state = { visible: false };
@@ -34,11 +32,9 @@ export default class Login extends Component{
     }
 
     render() {
-
-        const user = storageUtils.getUser();
         //Check whether to log in
-        if(user.email){
-            message.success("Automatic login successful !")
+        if(memoryUtils.username){
+            message.success("Automatic login successful ! " + memoryUtils.username)
             return <Redirect to = '/personal'/>
         }
 

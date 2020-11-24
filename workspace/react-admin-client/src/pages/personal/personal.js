@@ -58,8 +58,13 @@ const { SubMenu } = Menu;
                  console.log('OK');
                  storageUtils.removeUser();
                  memoryUtils.user={};
+                 memoryUtils.userID = {};
+
                  message.success("log out success!");
+
                  this.props.history.replace('/');
+                 this.forceUpdate();
+
              },
              onCancel() {
                  console.log('Cancel');
@@ -68,9 +73,10 @@ const { SubMenu } = Menu;
      }
     render() {
 
-        const user = storageUtils.getUser();
+        const user = memoryUtils.user.username;
+        console.log("per:"+user)
         //Check whether to log in
-        if(!user.email){
+        if(!user){
             return <Redirect to = '/login'/>
         }
 
@@ -86,7 +92,7 @@ const { SubMenu } = Menu;
                         <Menu.Item key="1" icon={<PieChartOutlined />} >
                             null
                         </Menu.Item>
-                        <SubMenu key="sub1" icon={<UserOutlined />} title={user.username} >
+                        <SubMenu key="sub1" icon={<UserOutlined />} title={user} >
                             <Menu.Item key="3"> <Link to ='/personal/personalinformation'>Personal information</Link></Menu.Item>
                             <Menu.Item key="4"> <Link to ='/personal/plantcards'>Plant Cards</Link></Menu.Item>
                             <Menu.Item key="5"> <Link to ='/personal/mycollection'>My collection of plants </Link></Menu.Item>

@@ -1,22 +1,25 @@
 import fire from "./commonFirebase";
 import storageUtils from "../utils/storageUtils";
+import memoryUtils from "../utils/memoryUtils";
 export default {
     writeUserPlant(userId,plantName) {
-        var user = storageUtils.getUser();
+        var user = memoryUtils.username;
         fire.database().ref('users/' + userId).set({
-            ID: user.uid,
+            ID: user,
             UserPlant: plantName
         });
     },
     //Get the name of the plant that the current user likes
     queryCollectionPlant()
     {
-        var user = storageUtils.getUser();
+        var user = memoryUtils.username;
         var ref = fire.database().ref("users");
-        ref.orderByChild("ID").equalTo(user.uid).on("child_added", function(snapshot) {
-            var arry = snapshot.toJSON()
-            console.log(arry);
+        var arry ={};
+
+        ref.orderByChild("ID").equalTo(user).on("child_added", function(snapshot) {
+            arry = snapshot.toJSON();
         });
+        return arry
     },
 
 

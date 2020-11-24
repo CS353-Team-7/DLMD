@@ -41,12 +41,11 @@ class  Demo extends Component{
      onFinish = (e) => {
          withRouter(Demo)
          fire.auth().signInWithEmailAndPassword(e.username,e.password).then((u)=>{
-             var c = fire.auth().currentUser;
-             memoryUtils.user = c //Store the username in memory
-             memoryUtils.userID = c.uid;
-             storageUtils.saveUser(c)//store local
-             message.success("success!"+c.email );
-             this.props.history.replace('/Personal');
+
+             memoryUtils.user = e //Store the username in memory
+             storageUtils.saveUser(e)//store local
+             message.success("success!"+e.username );
+             this.props.history.replace('/personal');
          }).catch((error)=>{
              message.error("username or password erro :"+error)
          })

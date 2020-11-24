@@ -4,18 +4,10 @@ import './Modal.css';
 import './plantList.css'
 import "firebase/auth";
 import storageUtils from "../../utils/storageUtils";
+import memoryUtils from "../../utils/memoryUtils";
 
-var user =  storageUtils.getUser();
-var userID;
-console.log("10:"+user.uid);
-//Checks a user is signed in
-if (user) {
-    console.log("User signed in");
-    //Gets the signed in user's ID
-    userID = user.uid;
-} else {
-    console.log("No user signed in");
-}
+
+
 
 
 
@@ -45,7 +37,6 @@ while (0 !== currentIndex)
 
 class PlantListComponent extends React.Component
 {
-
     constructor(props)
     {
         super(props);
@@ -108,7 +99,7 @@ class PlantListComponent extends React.Component
         var plant = input;
 
         //Assuming userID is already added?
-        var userURL = "https://don-t-let-me-die.firebaseio.com/users.json/" + userID;
+        var userURL = "https://don-t-let-me-die.firebaseio.com/users.json/" + memoryUtils.user.username;
 
 
         fetch("https://don-t-let-me-die.firebaseio.com/users.json", {
@@ -119,7 +110,7 @@ class PlantListComponent extends React.Component
             },
             body: JSON.stringify({
                 //Could also just set an ID as an array in the DB, add the plants to each one (more efficient)
-                ID: userID, // REPLACE "test" WITH userID
+                ID: memoryUtils.user.username, // REPLACE "test" WITH userID
                 UserPlant: plant
             })
         })
