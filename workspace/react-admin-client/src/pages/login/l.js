@@ -33,7 +33,7 @@ class  Demo extends Component{
     onFinishforget = (v) => {
 
         fire.auth().sendPasswordResetEmail(v.email).then((u)=>{
-            message.success(v.email+" Rest password email has been sent to your email")
+            message.success(v.email+" A 'Reset Password Email' has been sent to your email address")
         }).catch((error)=>{
             message.error(error.message);
         });
@@ -47,7 +47,7 @@ class  Demo extends Component{
              message.success("success!"+e.username );
              this.props.history.replace('/personal');
          }).catch((error)=>{
-             message.error("username or password erro :"+error)
+             message.error("Username or Password Error :"+error)
          })
     };
     showModal = () => {
@@ -71,7 +71,7 @@ class  Demo extends Component{
     };
     showConfirm = () => {
         Modal.info({
-            title: 'Forget password',
+            title: 'Forgot password?',
             okText: 'close',
             destroyOnClose: true,
             content: (
@@ -90,7 +90,7 @@ class  Demo extends Component{
                             rules={[
                                 {
                                     type: "email",
-                                    message: "The input is not valid E-mail!"
+                                    message: "The input is not a valid E-mail!"
                                 },
                                 {
                                     required: true,
@@ -126,9 +126,9 @@ class  Demo extends Component{
             >
 
                 <Form.Item
-                    label="Username"
+                    label="Email"
                     name="username"
-                    rules={[{ required: true, message: 'Please input your username!' }]}
+                    rules={[{ required: true, message: 'Please input your email!' }]}
                 >
                     <Input />
                 </Form.Item>
