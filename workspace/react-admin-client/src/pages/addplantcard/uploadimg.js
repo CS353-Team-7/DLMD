@@ -1,65 +1,46 @@
-import { Upload, message } from 'antd';
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import React, {Component} from 'react';
-function getBase64(img, callback) {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => callback(reader.result));
-    reader.readAsDataURL(img);
-}
+import {v4 as uuid} from 'uuid'
+import fire from "../../api/commonFirebase";
+import { Image } from 'antd';
+import memoryUtils from "../../utils/memoryUtils";
 
-function beforeUpload(file) {
-    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-    if (!isJpgOrPng) {
-        message.error('You can only upload JPG/PNG file!');
-    }
-    const isLt4M = file.size / 1024 / 1024 < 4;
-    if (!isLt4M) {
-        message.error('Image must smaller than 4MB!');
-    }
-    return isJpgOrPng && isLt4M;
-}
-
-export  default  class Avatar extends React.Component {
+export default class PicturesWall extends React.Component {
     state = {
-        loading: false,
-    };
+        imageUrl:null,
+        dis:false,
+    }
+    getImgUrl = ()=>{
+        return this.state.imageUrl
+    }
 
-    handleChange = info => {
-        if (info.file.status === 'uploading') {
-            this.setState({ loading: true });
-            return;
-        }
-        if (info.file.status === 'done') {
-            // Get this url from response in real world.
-            getBase64(info.file.originFileObj, imageUrl =>
-                this.setState({
-                    imageUrl,
-                    loading: false,
-                }),
-            );
-        }
-    };
+
+
 
     render() {
-        const { loading, imageUrl } = this.state;
-        const uploadButton = (
-            <div>
-                {loading ? <LoadingOutlined /> : <PlusOutlined />}
-                <div style={{ marginTop: 8 }}>Upload</div>
-            </div>
-        );
+        let imageUrl = null;
+        const readImages = async (e)=>{
+            const id = uuid()
+            const file = e.target.files[0]
+            const imagesRef = fire.storage().ref("images").child(id)
+            await imagesRef.put(file);
+            imagesRef.getDownloadURL().then((url)=>{
+                console.log(url)
+                this.setState({imageUrl:url})
+                this.setState({dis:true})
+                memoryUtils.imgUrl = url;
+            })
+
+            console.log(file)
+        }
         return (
-            <Upload
-                name="avatar"
-                listType="picture-card"
-                className="avatar-uploader"
-                showUploadList={false}
-                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                beforeUpload={beforeUpload}
-                onChange={this.handleChange}
-            >
-                {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
-            </Upload>
-        );
+            <div>
+                <input disabled={this.state.dis} type="file" accept="image/*"onChange={readImages}/>
+                <Image
+                    width={200}
+                    src={this.state.imageUrl}
+                />
+            </div>
+        )
     }
 }
+
