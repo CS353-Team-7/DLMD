@@ -1,0 +1,86 @@
+.search-result {
+    width: 30%;
+    height: 250px;
+    display: flex;
+    flex-direction: row;
+    background-color: var(--dates-background-color);
+    margin: 25px 10px;
+    border-radius: 10px;
+    transition: all .1s ease-in;
+}
+
+.result-image {
+    display: block;
+    width: 35%;
+    height: 100%;
+    border-radius: 10px 0 0 10px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.search-result:hover {
+    background: var(--fortyFive-deg-gradient);
+    transform: scale(1.01);
+    -webkit-box-shadow: 0px 10px 15px 10px rgba(0,0,0,0.25); 
+    box-shadow: 0px 10px 15px 10px rgba(0,0,0,0.25);
+    color: var(--body-background-color);
+}
+
+.search-result:hover > .result-content > .result-content-footer > .add-to-list-btn {
+    color: var(--body-background-color);
+    border-bottom: 2px solid var(--body-background-color);
+}
+
+.search-result:hover > .result-content > .result-content-header > .result-common, .search-result:hover > .result-content > .result-content-header > .result-scientific {
+    color: var(--body-background-color);
+}
+
+.result-content {
+    width: 65%;
+    position: relative;
+    padding: 15px 0 0 25px;
+    text-align: left;
+}
+
+.result-common {
+    font-size: 21px;
+    font-weight: 400;
+    color: white;
+}
+
+.result-scientific {
+    font-size: 18px;
+    line-height: 0;
+    opacity: .5;
+    font-weight: 300;
+    color: white;
+}
+
+.result-content-footer {
+    position: absolute;
+    bottom: 25px;
+}
+
+.add-to-list-btn {
+    font-size: 14px;
+    padding: 10px 25px;
+    background-color: transparent;
+    color: white;
+    border: none;
+    border-bottom: 2px solid white;
+    border-radius: 3.33px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .2s ease-in;
+    outline: none;
+}
+
+.add-to-list-btn:hover {
+    background-color: var(--body-background-color);
+    color: white !important;
+    transform: scale(1.025);
+    -webkit-box-shadow: 0px 0px 14px 1px rgba(0,0,0,0.05), 0px 2px 2px 5px rgba(0,0,0,0.05), 0px 5px 15px 5px rgba(0,0,0,0.1), 0px 10px 6px 15px rgba(0,0,0,0.05); 
+    box-shadow: 0px 0px 14px 1px rgba(0,0,0,0.05), 0px 2px 2px 5px rgba(0,0,0,0.05), 0px 5px 15px 5px rgba(0,0,0,0.1), 0px 10px 6px 15px rgba(0,0,0,0.05);
+    border-bottom: 2px solid var(--main-highlight);
+}
