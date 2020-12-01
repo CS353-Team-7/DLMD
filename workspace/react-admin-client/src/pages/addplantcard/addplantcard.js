@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Form, Input, InputNumber, Button,Card } from 'antd';
+import {Form, Input, InputNumber, Button, Card, message} from 'antd';
 import PicturesWall from './uploadimg'
 import memoryUtils from "../../utils/memoryUtils";
 const {Item} = Form
@@ -60,8 +60,7 @@ export default class AddPlantCard extends Component{
 
             values.url = this.pw.current.getImgUrl()
             this.postUserData(values)
-
-            console.log(values);
+            message.success("successful")
         };
         return (
             <Card >

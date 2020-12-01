@@ -36,7 +36,7 @@ export default class PicturesWall extends React.Component {
             <div>
                 <input disabled={this.state.dis} type="file" accept="image/*"onChange={readImages}/>
                 <Image
-                    width={200}
+                    width={300}
                     src={this.state.imageUrl}
                 />
             </div>
