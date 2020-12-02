@@ -154,7 +154,7 @@ class  Demo extends Component{
                         Submit
                     </Button>
                     <DrawerForm/>
-                    <Button onClick={this.showConfirm} type="dashed">forget password</Button>
+                    <Button onClick={this.showConfirm} type="dashed">Forgot Password?</Button>
                 </Form.Item>
 
             </Form>
