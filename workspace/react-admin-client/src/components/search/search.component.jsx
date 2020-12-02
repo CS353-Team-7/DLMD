@@ -3,6 +3,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { API_TOKEN } from '../env';
+import memoryUtils from "../../utils/memoryUtils";
 
 import SearchInput from '../search-input/search-input.component';
 import SearchResult from '../search-results/search-results.component';
@@ -61,19 +62,6 @@ class Search extends React.Component {
         event.preventDefault();
 
         await this.setState({ searching: true });
-
-        // const myHeaders = new Headers({
-        //     'Content-Type': 'application/json',
-        //     'Access-Control-Allow-Origin': '*'
-        //   });
-
-        // const proxyUrl = "https://thingproxy.freeboard.io/fetch/";
-        // const response = await fetch(proxyUrl + `https://trefle.io/api/v1/plants/search?token=${API_TOKEN}&q=${this.state.q}`);
-        // const results = await response.json();
-        // await console.log(results.data);
-        // await this.setState({ results: results.data ? results.data : [], searched: true, searching: false });
-        // console.log(this.state.results);
-
     }
 
     handleClick = event => {
@@ -93,6 +81,28 @@ class Search extends React.Component {
 
     clearText = () => {
         this.setState({ q: '', results: [], searched: false });
+    }
+
+    addToList(input) {
+        const plant = input;
+
+        //Assuming userID is already added?
+        const userURL = `https://don-t-let-me-die.firebaseio.com/users.json/${memoryUtils.user.username}`;
+        const params = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                //Could also just set an ID as an array in the DB, add the plants to each one (more efficient)
+                ID: memoryUtils.user.username, // REPLACE "test" WITH userID
+                UserPlant: plant
+            })
+        };
+
+        fetch("https://don-t-let-me-die.firebaseio.com/users.json", params);
+        alert(`${plant} has been added to your Collection!`);
     }
 
     render() {
@@ -115,7 +125,7 @@ class Search extends React.Component {
                         this.state.searched === true && !this.state.results.length ? <h1 className='no-results'>Sorry, we couldn't find any results for '{this.state.q}'</h1>
                         :
                         this.state.results.map((plant, index) => {
-                            return <SearchResult plant={plant} key={index} />
+                            return <SearchResult plant={plant} key={index} addToList={this.addToList} />
                         })
                     }
                 </div>

@@ -3,6 +3,7 @@ import "antd/dist/antd.css";
 import {Form, Input, Tooltip, Button, message} from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import React,{Component,useState} from "react";
+import memoryUtils from "../../utils/memoryUtils";
 
 
 class  RegistrationForm extends Component{
@@ -36,14 +37,27 @@ class  RegistrationForm extends Component{
             }
         }
     };
+
      onFinish = (v) => {
 
         fire.auth().createUserWithEmailAndPassword(v.email,v.password).then((u)=>{
+            var user =v.email.split(".")[0];
+            fire.database().ref('userinformation/' + user).set({
+                address:  'null',
+                age: 'null',
+                favorite:'null',
+                introduction:'null',
+                remark:'null',
+                telephone:'null'
+
+            });
             message.success(v.email+" Create success!")
         }).catch((error)=>{
             message.error(error.message);
         });
+
     };
+
     render() {
         return(
             <Form

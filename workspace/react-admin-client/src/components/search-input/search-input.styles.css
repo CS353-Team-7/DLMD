@@ -22,7 +22,7 @@
 
 .clear-text-icon {
     font-size: 21px;
-    color: #fff200;
+    color: var(--main-highlight);
     cursor: pointer;
 }
 

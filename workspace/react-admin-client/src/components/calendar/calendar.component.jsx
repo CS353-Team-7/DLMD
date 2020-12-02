@@ -5,6 +5,9 @@ import DateTile from '../date/date.component';
 import DateHeader from '../date-header/date-header.component';
 import Taskbar from '../taskbar/taskbar.component';
 
+import fire from "../../api/commonFirebase";
+import memoryUtils from "../../utils/memoryUtils";
+
 import './calendar.styles.css';
 
 
@@ -24,12 +27,62 @@ class Calendar extends React.Component {
             currentDays: 0,
             prevDays: 0,
             selectedDate: {},
-            removePlantClicked: false
+            removePlantClicked: false,
+            data: [],
+            plantList: [],
+            plantListWithData: [],
+            plantListForDay: [],
+            plantToRemove: {}
         };
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         this.setState({ selectedDate: new Date(), days: this.populateDaysInMonth(this.state.month, this.state.year) });
+        let plantListWithData = [];
+
+        await this.getPlantData();
+        await this.queryCollectionPlant();
+
+        await this.state.plantList.forEach(plant => {
+            this.state.data.forEach(({ common_name, scientific_name, image_url, average_precipitation }) => {
+                if (plant.UserPlant.toLowerCase() == common_name.toLowerCase()) {
+                    let newObj = {
+                        id: plant._ID,
+                        common_name,
+                        scientific_name,
+                        image_url,
+                        average_precipitation,
+                        isWatered: false
+                    };
+                    plantListWithData.push(newObj);
+                }
+            });
+        });
+
+        await this.setState({ plantListWithData });
+    }
+
+    getWateringDays = (index, day) => {
+        const d = new Date();
+        if (day.getTime() >= d.getTime()) {
+            const plantsForDay = [];
+            this.state.plantListWithData.forEach(plant => {
+                if (index % Math.round(plant.average_precipitation / 400) == 0) {
+                    plantsForDay.push(plant);
+                } 
+            });
+
+            return plantsForDay;
+        } else {
+            return [];
+        }
+    }
+
+    getPlantData = () => {
+        fetch("https://don-t-let-me-die.firebaseio.com/data.json")
+        .then(response => response.json())
+        .then(data => this.setState({ data }))
+        .catch(error => console.log(error));
     }
 
 
@@ -102,13 +155,38 @@ class Calendar extends React.Component {
     }
 
 
-    onTileClick = selectedDate => {
-        this.setState({ selectedDate });
+    onTileClick = (selectedDate, plants) => {
+        this.setState({ selectedDate, plantListForDay: plants });
     }
 
     
-    openCloseModal = () => {
-        this.setState({ removePlantClicked: !this.state.removePlantClicked });
+    openCloseModal = (plant) => {
+        this.setState({ removePlantClicked: !this.state.removePlantClicked, plantToRemove: plant });
+    }
+
+    removeFromList = () => {
+        const user = memoryUtils.user.username;
+        fire.database().ref(`users/${this.state.plantToRemove.id}`).remove()
+        .catch(error => alert(error));
+        alert(`Removed ${this.state.plantToRemove.common_name} from your list.`);
+        this.setState({ plantToRemove: {}, removePlantClicked: !this.state.removePlantClicked });
+        window.location.reload(false); 
+    }
+    
+    queryCollectionPlant = async () => {
+        const user = memoryUtils.user.username;
+        await fire.database().ref("users").orderByChild("ID").equalTo(user).once("value", (data) => {
+            const value = data.val();
+            const valueList = [];
+            for(let id in value) {
+                valueList.push({
+                    _ID:id,
+                    ID:value[id].ID,
+                    UserPlant:value[id].UserPlant
+                });
+            }
+            this.setState({ plantList: valueList });
+        });
     }
 
 
@@ -127,14 +205,33 @@ class Calendar extends React.Component {
                         {
                             this.state.days.map((day, index) => (
                                 index < this.state.prevDays || index >= this.state.prevDays + this.state.currentDays ? 
-                                <DateTile day={day} blackedOut={true} key={index} onTileClick={this.onTileClick} selected={this.state.selectedDate}/> 
-                                : <DateTile day={day} key={index} onTileClick={this.onTileClick} selected={this.state.selectedDate} />
+                                <DateTile 
+                                    day={day} 
+                                    blackedOut={true} 
+                                    key={index} 
+                                    onTileClick={this.onTileClick} 
+                                    selected={this.state.selectedDate} 
+                                    getWateringDays={() => this.getWateringDays(index, day)}
+                                /> 
+                                : <DateTile 
+                                    day={day} 
+                                    key={index} 
+                                    onTileClick={this.onTileClick} 
+                                    selected={this.state.selectedDate} 
+                                    getWateringDays={() => this.getWateringDays(index, day)}
+                                />
                                 // <DateTile day={day} key={index} />
                             ))
                         }
                     </div>
                 </div>
-                <Taskbar selectedDate={this.state.selectedDate} openCloseModal={this.openCloseModal} removePlantClicked={this.state.removePlantClicked} />
+                <Taskbar 
+                    selectedDate={this.state.selectedDate} 
+                    openCloseModal={this.openCloseModal} 
+                    removePlantClicked={this.state.removePlantClicked} 
+                    removeFromList={this.removeFromList}
+                    plantListWithData={this.state.plantListForDay}
+                />
             </div>
         );
     }

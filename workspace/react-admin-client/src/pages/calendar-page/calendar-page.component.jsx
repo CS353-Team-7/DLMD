@@ -19,7 +19,7 @@ class CalendarPage extends React.Component {
     render() {
         return (
             <div className='calendar-page'>
-                <h1 className='calendar-title'>Plant Calendar</h1>
+                <h1 className='calendar-title'></h1>
                 <Calendar />
                 <Search />
             </div>

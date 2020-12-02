@@ -2,13 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import './drawer.css';
-import { Drawer, Form, Button, Col, Row, Input, Select, DatePicker } from 'antd';
+import {Drawer, Form, Button, Col, Row, Input, Select, DatePicker, InputNumber, message} from 'antd';
 import { SettingOutlined } from '@ant-design/icons';
+import memoryUtils from "../../utils/memoryUtils";
+import fire from "../../api/commonFirebase";
 //a
 const { Option } = Select;
 
 export  default  class DrawerForm extends React.Component {
-    state = { visible: false };
+    state = {
+        list: {},
+        visible: false,
+
+    };
 
     showDrawer = () => {
         this.setState({
@@ -21,8 +27,72 @@ export  default  class DrawerForm extends React.Component {
             visible: false,
         });
     };
+    componentDidMount() {
+        this.queryInformation();
+    }
+     queryInformation ()
+    {
+        var user = memoryUtils.user.username.split(".")[0];
+        console.log(user)
+        var ref = fire.database().ref("userinformation/"+user);
+        var value;
+        ref.once("value",(data)=>{
+            value= data.val();
+            console.log(value)
 
+            this.setState({list:value},()=>{
+                console.log(this.state.list.telephone);
+            })
+
+        });
+
+
+
+
+
+
+    };
     render() {
+
+        const layout = {
+            labelCol: { span: 8 },
+            wrapperCol: { span: 16 },
+        };
+
+        const validateMessages = {
+            required: '${label} is required!',
+            types: {
+                email: '${label} is not a valid email!',
+                number: '${label} is not a valid number!',
+            },
+            number: {
+                range: '${label} must be between ${min} and ${max}',
+            },
+        };
+
+
+        const onFinish = values => {
+            console.log(values);
+            var user = memoryUtils.user.username.split(".")[0];
+            var vaddress = (values.address === undefined ? this.state.list.address : values.address)
+            var  vage =  (values.age === undefined ? this.state.list.age:values.age)
+            var vfavorite = (values.favorite === undefined ? this.state.list.favorite:values.favorite)
+            var vintr = (values.introduction === undefined ? this.state.list.introduction:values.introduction)
+            var vremark = (values.remark === undefined ? this.state.list.remark:values.remark)
+            var vtelephone = (values.telephone === undefined ? this.state.list.telephone:values.telephone)
+            console.log(vaddress+" "+vage+" "+vfavorite+" "+vintr+" "+vremark+" "+vtelephone)
+            fire.database().ref('userinformation/' + user).set({
+                address:  vaddress,
+                age: vage,
+                favorite:vfavorite,
+                introduction:vintr,
+                remark:vremark,
+                telephone:vtelephone
+
+            });
+            message.success("modify successfully !")
+        };
+
         return (
             <>
                 <Button type="primary" onClick={this.showDrawer}>
@@ -49,62 +119,31 @@ export  default  class DrawerForm extends React.Component {
                         </div>
                     }
                 >
-                    <Form layout="vertical" hideRequiredMark>
-                        <Row gutter={16}>
-                            <Col span={12}>
-                                <Form.Item
-                                    name="telephone"
-                                    label="Telephone"
-                                    rules={[{ required: true, message: 'Please enter telephone number' }]}
-                                >
-                                    <Input placeholder="Please enter telephone number" />
-                                </Form.Item>
-                            </Col>
+                    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
+                        <Form.Item name={'telephone'} label="Telephone">
+                            <Input  ref="text" defaultValue={this.state.list.telephone}  ></Input>
+                        </Form.Item>
+                        <Form.Item name={'address'} label="Address"  >
+                            <Input defaultValue={this.state.list.address}/>
+                        </Form.Item>
+                        <Form.Item name={'age'} label="Age" rules={[{ type: 'number', min: 0, max: 99 }]}>
+                            <InputNumber defaultValue={this.state.list.age}/>
+                        </Form.Item>
+                        <Form.Item name={'favorite'} label="Favorite">
+                            <Input defaultValue={this.state.list.favorite}/>
+                        </Form.Item>
+                        <Form.Item name={ 'remark'} label="Remark">
+                            <Input.TextArea defaultValue={this.state.list.remark}/>
+                        </Form.Item>
+                        <Form.Item name={'introduction'} label="Introduction">
+                            <Input.TextArea defaultValue={this.state.list.introduction}/>
+                        </Form.Item>
 
-                        </Row>
-
-
-                        <Row gutter={16}>
-                            <Col span={12}>
-                                <Form.Item
-                                    name="address"
-                                    label="Address"
-                                    rules={[{ required: true, message: 'Please enter address' }]}
-                                >
-                                    <Input placeholder="Please enter address" />
-                                </Form.Item>
-                            </Col>
-                        </Row>
-
-                        <Row gutter={16}>
-                            <Col span={12}>
-                                <Form.Item
-                                    name="favoritesport"
-                                    label="Favorite sport"
-                                    rules={[{ required: true, message: 'Please enter favorite sport' }]}
-                                >
-                                    <Input placeholder="Please enter favorite sport" />
-                                </Form.Item>
-                            </Col>
-
-                        </Row>
-
-                        <Row gutter={16}>
-                            <Col span={24}>
-                                <Form.Item
-                                    name="description"
-                                    label="Info"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'please enter Info',
-                                        },
-                                    ]}
-                                >
-                                    <Input.TextArea rows={4} placeholder="please enter url description" />
-                                </Form.Item>
-                            </Col>
-                        </Row>
+                        <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+                            <Button type="primary" htmlType="submit">
+                                Submit
+                            </Button>
+                        </Form.Item>
                     </Form>
                 </Drawer>
             </>

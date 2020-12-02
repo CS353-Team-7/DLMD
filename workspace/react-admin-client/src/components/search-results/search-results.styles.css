@@ -11,7 +11,7 @@
 
 .result-image {
     display: block;
-    width: 30%;
+    width: 35%;
     height: 100%;
     border-radius: 10px 0 0 10px;
     background-position: center;
@@ -32,22 +32,29 @@
     border-bottom: 2px solid var(--body-background-color);
 }
 
+.search-result:hover > .result-content > .result-content-header > .result-common, .search-result:hover > .result-content > .result-content-header > .result-scientific {
+    color: var(--body-background-color);
+}
 
 .result-content {
-    width: 70%;
+    width: 65%;
     position: relative;
-    padding: 0 0 0 25px;
+    padding: 15px 0 0 25px;
     text-align: left;
 }
 
-.result-content-header h2 {
+.result-common {
+    font-size: 21px;
     font-weight: 400;
+    color: white;
 }
 
-.result-content-header h3 {
+.result-scientific {
+    font-size: 18px;
     line-height: 0;
     opacity: .5;
     font-weight: 300;
+    color: white;
 }
 
 .result-content-footer {
@@ -56,7 +63,8 @@
 }
 
 .add-to-list-btn {
-    padding: 15px 30px;
+    font-size: 14px;
+    padding: 10px 25px;
     background-color: transparent;
     color: white;
     border: none;
@@ -69,7 +77,7 @@
 }
 
 .add-to-list-btn:hover {
-    background-color: var(--sidebar-background-color);
+    background-color: var(--body-background-color);
     color: white !important;
     transform: scale(1.025);
     -webkit-box-shadow: 0px 0px 14px 1px rgba(0,0,0,0.05), 0px 2px 2px 5px rgba(0,0,0,0.05), 0px 5px 15px 5px rgba(0,0,0,0.1), 0px 10px 6px 15px rgba(0,0,0,0.05); 
