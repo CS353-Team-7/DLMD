@@ -27,7 +27,6 @@ export default class Homepage extends Component{
                             <li><a href="homepage.html">Home</a></li>
                             <li><a href="about.html">About</a></li>
                             <li><Link className="loginLink" to="Login">Login</Link></li>
-                        <li><button type = "submit" className="button_2"><a href="signup.html">Sign Up</a></button></li>
                     </ul>
                 </nav>
         </div>
