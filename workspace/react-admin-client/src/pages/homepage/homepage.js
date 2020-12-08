@@ -27,10 +27,7 @@ export default class Homepage extends Component{
                             <li><a href="homepage.html">Home</a></li>
                             <li><a href="about.html">About</a></li>
                             <li><Link className="loginLink" to="Login">Login</Link></li>
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
                     </ul>
                 </nav>
         </div>
