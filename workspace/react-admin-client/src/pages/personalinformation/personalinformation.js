@@ -1,14 +1,22 @@
 import React, {Component} from 'react';
-import {Badge, Descriptions, Divider} from "antd";
+import {Badge, Descriptions, Divider, message} from "antd";
 import memoryUtils from "../../utils/memoryUtils";
 import DrawerForm from './informationdrawer'
 import fire from "../../api/commonFirebase";
+import { Modal, Button, Space } from 'antd';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+import plantTest from "../plantcards/image/erro.png";
+import {Redirect, withRouter} from 'react-router-dom';
 
+const ReachableContext = React.createContext();
+const UnreachableContext = React.createContext();
+const { confirm } = Modal;
 
-export default class PersonalInformation extends Component{
+export  class PersonalInformation extends Component{
     state = {
         list: {},
     };
+
     componentDidMount() {
         this.queryInformation();
     }
@@ -28,7 +36,48 @@ export default class PersonalInformation extends Component{
             })
         });
     };
+
     render() {
+        function showDeleteConfirm() {
+            confirm({
+                title: 'Delete the account',
+                icon: <ExclamationCircleOutlined />,
+                content: ' Are you sure you want to delete your account? Any information that contains you will disappear!',
+                okText: 'Yes',
+                okType: 'danger',
+                cancelText: 'No',
+                onOk() {
+                    var user = fire.auth().currentUser
+                    if(user == null)
+                    {
+                        user = fire.auth().signInWithEmailAndPassword(memoryUtils.user.username,memoryUtils.user.password)
+                    }
+
+                    user.delete().then(function() {
+                        var user = memoryUtils.user.username;
+                        var ref = fire.database().ref("users").orderByChild("ID").equalTo(user).once("value",(data)=> {
+
+                            const value = data.val();
+                            for (let id in value) {
+                                fire.database().ref("users/" + id).remove()
+                                fire.database().ref("plantcard/" + id).remove()
+                            }
+                        });
+                        fire.database().ref("userinformation/"+memoryUtils.user.username.split('.')[0]).remove()
+                        memoryUtils.user = {};
+                        message.success("Delete succeed")
+                    }).catch(function(error) {
+                        // An error happened.
+                    });
+
+                   return <Redirect to = '/login/'/>
+
+                },
+                onCancel() {
+                    console.log('Cancel');
+                },
+            });
+        }
         const user = memoryUtils.user;
         return (
 
@@ -52,8 +101,12 @@ export default class PersonalInformation extends Component{
                     </Descriptions.Item>
                 </Descriptions>
                 <DrawerForm/>
+                <Button className="site-button-ghost-wrapper"  danger onClick={showDeleteConfirm} type="dashed">
+                    Delete the account
+                </Button>
             </div>
 
         )
     }
 }
+export default withRouter(PersonalInformation);

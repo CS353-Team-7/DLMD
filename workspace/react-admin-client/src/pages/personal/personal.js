@@ -100,9 +100,7 @@ const { SubMenu } = Menu;
                 <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse} width={300}>
                     <div className="logo" style={{ minHeight: '15vh' }}> </div>
                     <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-                        <Menu.Item key="1" icon={<PieChartOutlined />} >
-                            null
-                        </Menu.Item>
+
                         <SubMenu key="sub1" icon={<UserOutlined />} title={user} >
                             <Menu.Item key="3"> <Link to ='/personal/personalinformation'>Personal information</Link></Menu.Item>
                             <Menu.Item key="5"> <Link to ='/personal/mycollection'>My collection of plants </Link></Menu.Item>
@@ -114,10 +112,7 @@ const { SubMenu } = Menu;
                            <Link to ='/personal/plantcalendar'>Calendar</Link>
                         </Menu.Item>
 
-                        <SubMenu key="sub2" icon={<SearchOutlined />} title="Test">
-                            <Menu.Item key="7"><Link to ='/personal/wateringmainview'>Test</Link></Menu.Item>
-                            <Menu.Item key="8"><Link to ='/personal/wateringcardsview'>Test</Link></Menu.Item>
-                        </SubMenu>
+
                         <Menu.Item key="9" icon={<SearchOutlined />}>
                             <Link to ='/personal/plantList'>Search</Link>
                         </Menu.Item>
@@ -145,7 +140,7 @@ const { SubMenu } = Menu;
                                 <Route path='/personal/wateringmainview' component={WateringMainView}/>
                                 <Route path='/personal/wateringcardsview' component={WateringCardsView}/>
                                 <Route path='/personal/plantList' component={PlantListComponent}/>
-                                <Redirect to='/personal/plantcards'/>
+                                <Redirect to='/personal/personalinformation'/>
                             </Switch>
                         </div>
 
