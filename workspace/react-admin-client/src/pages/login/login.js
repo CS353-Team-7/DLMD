@@ -33,7 +33,7 @@ export default class Login extends Component{
 
     render() {
         //Check whether to log in
-        if(memoryUtils.username){
+        if(memoryUtils.user.username){
             message.success("Automatic login successful ! " + memoryUtils.username)
             return <Redirect to = '/personal'/>
         }
