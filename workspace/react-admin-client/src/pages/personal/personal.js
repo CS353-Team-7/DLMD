@@ -118,7 +118,7 @@ const { SubMenu } = Menu;
                             <Link to ='/personal/plantList'>Search</Link>
                         </Menu.Item>
                         <Menu.Item key = "11" icon={<MessageOutlined />}>
-                            <Link to='/personal/message'>Message</Link>
+                            <Link to='/personal/message'>Comments</Link>
                         </Menu.Item>
                     </Menu>
                 </Sider>

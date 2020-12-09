@@ -55,15 +55,30 @@ export  class PersonalInformation extends Component{
 
                     user.delete().then(function() {
                         var user = memoryUtils.user.username;
-                        var ref = fire.database().ref("users").orderByChild("ID").equalTo(user).once("value",(data)=> {
+                        fire.database().ref("users").orderByChild("ID").equalTo(user).once("value",(data)=> {
 
                             const value = data.val();
                             for (let id in value) {
                                 fire.database().ref("users/" + id).remove()
+                            }
+                        });
+                        fire.database().ref("comments").orderByChild("ID").equalTo(user).once("value",(data)=> {
+
+                            const value = data.val();
+                            for (let id in value) {
+                                fire.database().ref("comments/" + id).remove()
+                            }
+                        });
+                        fire.database().ref("plantcard").orderByChild("ID").equalTo(user).once("value",(data)=> {
+
+                            const value = data.val();
+                            for (let id in value) {
                                 fire.database().ref("plantcard/" + id).remove()
                             }
                         });
+
                         fire.database().ref("userinformation/"+memoryUtils.user.username.split('.')[0]).remove()
+
                         memoryUtils.user = {};
                         message.success("Delete succeed")
                     }).catch(function(error) {
