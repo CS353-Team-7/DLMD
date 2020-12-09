@@ -14,7 +14,7 @@ import {
     DesktopOutlined,
     PieChartOutlined,
     FileOutlined,
-    TeamOutlined,
+    TeamOutlined,MessageOutlined,
     UserOutlined,
 } from '@ant-design/icons';
 import './personal.css'
@@ -31,6 +31,7 @@ import storageUtils from "../../utils/storageUtils";
 import { withRouter } from 'react-router-dom';
 import PlantListComponent from '../plantList/plantList';
 import {formateDate} from "../../utils/dateUtils";
+import Message from '../message/message'
 import DateHeader from "../../components/date-header/date-header.component";
 
 
@@ -116,6 +117,9 @@ const { SubMenu } = Menu;
                         <Menu.Item key="9" icon={<SearchOutlined />}>
                             <Link to ='/personal/plantList'>Search</Link>
                         </Menu.Item>
+                        <Menu.Item key = "11" icon={<MessageOutlined />}>
+                            <Link to='/personal/message'>Message</Link>
+                        </Menu.Item>
                     </Menu>
                 </Sider>
                 <Layout className="site-layout">
@@ -140,6 +144,7 @@ const { SubMenu } = Menu;
                                 <Route path='/personal/wateringmainview' component={WateringMainView}/>
                                 <Route path='/personal/wateringcardsview' component={WateringCardsView}/>
                                 <Route path='/personal/plantList' component={PlantListComponent}/>
+                                <Route path='/personal/message' component={Message}/>
                                 <Redirect to='/personal/personalinformation'/>
                             </Switch>
                         </div>
