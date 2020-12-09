@@ -47,12 +47,11 @@ export  class PersonalInformation extends Component{
                 okType: 'danger',
                 cancelText: 'No',
                 onOk() {
-                    var user = fire.auth().currentUser
-                    if(user == null)
-                    {
-                        user = fire.auth().signInWithEmailAndPassword(memoryUtils.user.username,memoryUtils.user.password)
-                    }
 
+
+                    fire.auth().signInWithEmailAndPassword(memoryUtils.user.username,memoryUtils.user.password)
+                    var user = fire.auth().currentUser
+                    console.log("signIn:"+user)
                     user.delete().then(function() {
                         var user = memoryUtils.user.username;
                         fire.database().ref("users").orderByChild("ID").equalTo(user).once("value",(data)=> {
@@ -83,6 +82,7 @@ export  class PersonalInformation extends Component{
                         message.success("Delete succeed")
                     }).catch(function(error) {
                         // An error happened.
+                        message.error(error.toString())
                     });
 
                    return <Redirect to = '/login/'/>

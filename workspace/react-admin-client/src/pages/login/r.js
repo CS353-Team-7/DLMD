@@ -39,6 +39,7 @@ class  RegistrationForm extends Component{
     };
 
      onFinish = (v) => {
+        v.email = v.email.toString().toLowerCase()
 
         fire.auth().createUserWithEmailAndPassword(v.email,v.password).then((u)=>{
             var user =v.email.split(".")[0];
