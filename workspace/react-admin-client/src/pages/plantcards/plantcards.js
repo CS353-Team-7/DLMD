@@ -43,6 +43,22 @@ export default class PlantCards extends Component{
             this.setState({list:valuelist})
             console.log(this.state.list);
         });
+        var ref = fire.database().ref("users").orderByChild("ID").equalTo(user).once("value",(data)=>{
+
+            const value = data.val();
+            console.log(value);
+            const valuelist = [];
+            for(let id in value) {
+                if(value[id].url == null)
+                {
+                    value[id].url =plantTest;
+                }
+                valuelist.push({_ID:id,ID:value[id].ID,plantName:value[id].UserPlant,Note:value[id].Note,Location:value[id].Location,Url:value[id].url});
+            }
+            console.log(valuelist);
+            this.setState({list:valuelist})
+            console.log(this.state.list);
+        });
         this.setState({loading:false})
 
     }
@@ -53,6 +69,7 @@ export default class PlantCards extends Component{
     DeleteCollection =(user)=>{
         var Myuser = memoryUtils.user.username;
         var ref = fire.database().ref("plantcard/"+user._ID).remove()
+        var ref = fire.database().ref("users/"+user._ID).remove()
         this.queryCollectionPlant();
         message.success("Delete success!:"+user.UserPlant)
         this.setState({loading:false})
@@ -90,10 +107,6 @@ export default class PlantCards extends Component{
 
                     <Divider type="vertical" />
                     <Button type="primary" shape="round"  icon={<DeleteOutlined />} onClick={()=>this.DeleteCollection(card)}/>
-
-
-
-
                 </Card>
             )
         }
