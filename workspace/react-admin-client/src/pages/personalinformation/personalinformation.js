@@ -5,7 +5,6 @@ import DrawerForm from './informationdrawer'
 import fire from "../../api/commonFirebase";
 import { Modal, Button, Space } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
-import plantTest from "../plantcards/image/erro.png";
 import {Redirect, withRouter} from 'react-router-dom';
 
 const ReachableContext = React.createContext();

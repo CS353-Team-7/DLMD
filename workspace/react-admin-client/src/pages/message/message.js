@@ -49,7 +49,7 @@ export  default class Message extends Component {
             body: JSON.stringify({
                 //Could also just set an ID as an array in the DB, add the plants to each one (more efficient)
                 ID: input.author, // REPLACE "test" WITH userID
-                avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+                avatar: 'https://firebasestorage.googleapis.com/v0/b/don-t-let-me-die.appspot.com/o/images%2F1b081de2-49be-49a4-9d49-416a2929ab54?alt=media&token=09e858ca-9216-4f18-9c43-f37c9aa238d5',
                 author:input.author,
                 content:input.content,
                 datetime: input.datetime
@@ -93,7 +93,7 @@ export  default class Message extends Component {
                 comments: [
                     {
                         author: memoryUtils.user.username,
-                        avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+                        avatar: 'https://firebasestorage.googleapis.com/v0/b/don-t-let-me-die.appspot.com/o/images%2F1b081de2-49be-49a4-9d49-416a2929ab54?alt=media&token=09e858ca-9216-4f18-9c43-f37c9aa238d5',
                         content: <p>{this.state.value}</p>,
                         datetime: formateDate(Date.now()),
                     },
