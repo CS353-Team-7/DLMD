@@ -5,6 +5,7 @@ import './plantList.css'
 import "firebase/auth";
 import storageUtils from "../../utils/storageUtils";
 import memoryUtils from "../../utils/memoryUtils";
+import {message} from "antd";
 
 
 
@@ -111,10 +112,14 @@ class PlantListComponent extends React.Component
             body: JSON.stringify({
                 //Could also just set an ID as an array in the DB, add the plants to each one (more efficient)
                 ID: memoryUtils.user.username, // REPLACE "test" WITH userID
-                UserPlant: plant
+                UserPlant: plant.common_name,
+                url: plant.image_url,
+                Location:'From search',
+                Note:"Scientific Name:"+plant.scientific_name
             })
         })
-        alert(plant + " has been added to your Collection!");
+        this.closeModal();
+        message.success(plant + " has been added to your Collection!");
     }
 
 
@@ -263,7 +268,7 @@ class PlantListComponent extends React.Component
                             <text style = {{color:"black"}}>Scientific Name: {items[num].scientific_name}<br></br></text>
                             <text style = {{color:"black"}}>Family: {items[num].family_common_name}<br></br></text>
                         </div>
-                        <button id = "addPlant" onClick={()=>this.postUserData(items[num].common_name)}>Add to Collection</button>
+                        <button id = "addPlant" onClick={()=>this.postUserData(items[num])}>Add to Collection</button>
 
                     </Modal>
 
