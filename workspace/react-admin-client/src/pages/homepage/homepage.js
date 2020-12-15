@@ -2,11 +2,11 @@ import React,{Component} from "react";
 /*
 routing component of home page
  */
-import styles from './css/homepagestyle.css'
+import './css/homepagestyle.css'
 import {Link} from "react-router-dom";
 import leaf1 from './img/leaf1.png';
+import plant4 from "./img/plant4.jpg";
 import leaf from './img/leaf.png';
-import img08 from './img/08.png';
 import calendar from './img/calendar.png';
 import check from './img/check.png';
 
@@ -17,17 +17,18 @@ export default class Homepage extends Component{
     render() {
         return (
         <div>
-            <header className="homeHeader">
+            <body className="homepagebody">
+            <header className ="homepageheader">
                 <div className ="container">
-                    <div id ="branding">
-                        <h1>DON'T LET ME DIE  <img src={leaf1} alt=""/></h1>
+                    <div id = "branding">
+                        <h1>DON'T LET ME DIE <img src={leaf1}/></h1>
                     </div>
                     <nav>
                         <ul>
-                            <li><a href="homepage.html">Home</a></li>
-                            <li><a href="about.html">About</a></li>
-                            <li><Link className="loginLink" to="Login">Login</Link></li>
 
+
+                        <li><a href="../DLMD-main/login/login.html">Login</a></li>
+                        <li><a href="../DLMD-main/login/login.html">Sign Up</a></li>
                     </ul>
                 </nav>
         </div>
@@ -35,48 +36,40 @@ export default class Homepage extends Component{
         <section id="showcase">
             <div className = "container">
                 <div className ="box2">
-                    <h1> DO YOU WANT YOUR PLANTS TO DIE? NO?</h1>
-                    <a href="createaccount.html">  <button type = "submit" className="button_1"> How do I save them?</button></a>
+                    <h1> NOT SURE HOW TO TAKE CARE OF YOUR PLANTS?</h1>
+                    <a href="../DLMD-main/login/login.html">  <button type = "submit" class="button_1"> Create a free account</button></a>
                 </div>
                 <div className= "box2">
-                    <img src={img08} alt=""/>
+                    <img src={plant4}/>
                 </div>
             </div>
         </section>
         <section id="boxes">
             <div className="container">
                 <div className="box">
-                    <img src={leaf} alt=""/>
+                    <img src={leaf}/>
                         <h3>Add your plants</h3>
-                        <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                            when an unknown printer took a galley of type and scrambled it to make a type
-                            specimen book.
-                        </p>
+                        <p>Browse a database of exisiting houseplants and add them to your collection.
+                            Can't find the plant you want? No problem. You can create your own plant cards.</p>
                 </div>
                 <div className="box">
-                    <img src={calendar} />
+                    <img src={calendar}/>
                         <h3>See your calendar</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                            when an unknown printer took a galley of type and scrambled it to make a type
-                            specimen book.</p>
+                        <p>Your selected plants will be automatically added to a calendar that will create a waterinmg and care scheduule for each individual plant.</p>
                 </div>
                 <div className="box">
-                    <img src={check} alt=""/>
+                    <img src={check}/>
                         <h3>Get the ultimate care</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                            when an unknown printer took a galley of type and scrambled it to make a type
-                            specimen book.</p>
+                        <p>That's it you don't have to do anything more. The care schedule will show you exactly when to take care of each plant so you don't have to worry about remembering.</p>
                 </div>
             </div>
         </section>
         <footer>
             <p> CS353 Team 7 Copyright &copy; 2020</p>
         </footer>
+            </body>
         </div>
+
         )
     }
 }
