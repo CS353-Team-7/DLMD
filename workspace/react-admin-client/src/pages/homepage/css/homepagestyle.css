@@ -1,5 +1,5 @@
 
-body{
+.homepagebody{
   font: 15px/1.5 Arial, Helvetica, sans-serif;
   padding:0;
   margin:0;
@@ -23,7 +23,7 @@ ul{
  padding:0;
 }
 
-header{
+.homepageheader{
   font-family: 'Oswald', sans-serif;
   background: #030D18;
   color:#ffffff;
@@ -33,7 +33,7 @@ header{
   /*border-bottom: #28371F 3px solid;*/
 }
 
-header a{
+.homepageheader a{
   color:#ffffff;
   text-decoration: none;
   text-transform: uppercase;
@@ -41,20 +41,29 @@ header a{
 
 }
 
-header li{
-  float: left;
-  display:inline;
-  padding:0 15px 0 15px;
+.homepageheader li{
+    float: left;
+    display:inline;
+    padding:0 15px 10px 10px;
+    text-align: -webkit-match-parent;
+    font-weight: bold;
+    display: block;
+    font-size: 16px;
 }
 
-header #branding{
+.homepageheader #branding{
   float: left;
 }
 
-header #branding h1{
+.homepageheader #branding h1{
   margin:0;
+    color: white;
+    font-weight: bold;
+    display: block;
+    font-size: 2em;
+
 }
-header nav{
+.homepageheader nav{
   float:right;
   margin-top: 10px;
 }
@@ -70,6 +79,9 @@ header nav{
   margin-top: 100px;
   font-size: 55px;
   margin-bottom: 10px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
 
 }
 .button_1{
@@ -104,7 +116,18 @@ display: inline;
    width: 30%;
    padding:10px;
    text-align: center;
+
  }
+#boxes .box h3{
+    display: block;
+    font-size: 1.17em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+
+}
  #showcase .box2{
    float: left;
    width: 45%;
