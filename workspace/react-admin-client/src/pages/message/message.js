@@ -120,7 +120,7 @@ export  default class Message extends Component {
                 <Comment
                     avatar={
                         <Avatar
-                            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                            src="https://firebasestorage.googleapis.com/v0/b/don-t-let-me-die.appspot.com/o/images%2F1b081de2-49be-49a4-9d49-416a2929ab54?alt=media&token=09e858ca-9216-4f18-9c43-f37c9aa238d5"
                             alt="Han Solo"
                         />
                     }
