@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import storageUtils from "../../utils/storageUtils";
 import fire from "../../api/commonFirebase";
-import {List, Typography, Divider, Spin, Card, Table, Button, message} from 'antd';
+import {List, Typography, Divider, Spin, Card, Table, Button, message, Image} from 'antd';
 import memoryUtils from "../../utils/memoryUtils";
 import LinkButton from 'react'
 
@@ -35,6 +35,18 @@ export default class myCollection extends Component{
             }
             ,
             {
+                title: 'Image',
+                dataIndex: '',
+                render: (user) => <Image width={60} height={60}  src={user.Image}></Image>,
+            }
+            ,
+            {
+                title: 'Note',
+                dataIndex: 'Note',
+
+            }
+            ,
+            {
                 title: 'Action',
                 dataIndex: '',
                 key: 'x',
@@ -62,7 +74,7 @@ export default class myCollection extends Component{
             const value = data.val();
             const valuelist = [];
             for(let id in value) {
-                valuelist.push({_ID:id,ID:value[id].ID,UserPlant:value[id].UserPlant});
+                valuelist.push({_ID:id,ID:value[id].ID,UserPlant:value[id].UserPlant,Image:value[id].url,Note:value[id].Note});
             }
             console.log(valuelist);
             this.setState({list:valuelist})
