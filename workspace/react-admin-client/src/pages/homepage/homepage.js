@@ -27,8 +27,8 @@ export default class Homepage extends Component{
                         <ul>
 
 
-                        <li><a href="../DLMD-main/login/login.html">Login</a></li>
-                        <li><a href="../DLMD-main/login/login.html">Sign Up</a></li>
+                        <li><a href="/login">Login</a></li>
+                        <li><a to="/login">Sign Up</a></li>
                     </ul>
                 </nav>
         </div>
@@ -37,7 +37,7 @@ export default class Homepage extends Component{
             <div className = "container">
                 <div className ="box2">
                     <h1> NOT SURE HOW TO TAKE CARE OF YOUR PLANTS?</h1>
-                    <a href="../DLMD-main/login/login.html">  <button type = "submit" class="button_1"> Create a free account</button></a>
+                    <a href="/login">  <button type = "submit" class="button_1"> Create a free account</button></a>
                 </div>
                 <div className= "box2">
                     <img src={plant4}/>
