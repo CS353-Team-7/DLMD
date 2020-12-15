@@ -15,6 +15,7 @@ const { confirm } = Modal;
 export  class PersonalInformation extends Component{
     state = {
         list: {},
+        number:0,
     };
 
     componentDidMount() {
@@ -35,6 +36,17 @@ export  class PersonalInformation extends Component{
                 console.log(this.state.list.telephone);
             })
         });
+
+        var user = memoryUtils.user.username;
+        var ref = fire.database().ref("users").orderByChild("ID").equalTo(user).once("value",(data)=>{
+
+            const value = data.val();
+            var  i = 0;
+            for(let id in value) {
+               i++
+            }
+            this.setState({number:i})
+        });
     };
 
     render() {
@@ -47,8 +59,6 @@ export  class PersonalInformation extends Component{
                 okType: 'danger',
                 cancelText: 'No',
                 onOk() {
-
-
                     fire.auth().signInWithEmailAndPassword(memoryUtils.user.username,memoryUtils.user.password)
                     var user = fire.auth().currentUser
                     console.log("signIn:"+user)
@@ -108,7 +118,7 @@ export  class PersonalInformation extends Component{
                     <Descriptions.Item label="Status" span={3}>
                         <Badge status="processing" text="online" />
                     </Descriptions.Item>
-                    <Descriptions.Item label="My number of plants">plants</Descriptions.Item>
+                    <Descriptions.Item label="My number of plants">{this.state.number}</Descriptions.Item>
                     <Descriptions.Item label="Age">{this.state.list.age}</Descriptions.Item>
                     <Descriptions.Item label="Favorite plant">{this.state.list.favorite}</Descriptions.Item>
                     <Descriptions.Item label=" Introduction">
