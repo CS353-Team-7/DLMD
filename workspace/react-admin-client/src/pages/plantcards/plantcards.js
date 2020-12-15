@@ -27,11 +27,12 @@ export default class PlantCards extends Component{
     queryCollectionPlant=()=>
     {
         var user = memoryUtils.user.username;
+        const valuelist = [];
         var ref = fire.database().ref("plantcard").orderByChild("ID").equalTo(user).once("value",(data)=>{
 
             const value = data.val();
             console.log(value);
-            const valuelist = [];
+
             for(let id in value) {
                 if(value[id].url == null)
                 {
@@ -47,7 +48,6 @@ export default class PlantCards extends Component{
 
             const value = data.val();
             console.log(value);
-            const valuelist = [];
             for(let id in value) {
                 if(value[id].url == null)
                 {
