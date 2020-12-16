@@ -36,7 +36,7 @@ const Taskbar = props => {
                     <div className='remove-plant-modal'>
                         <div>
                             <h1 className='modal-warning'>WARNING</h1>
-                            <h2 className='modal-secondary-warning'>You're about to remove PLANT_NAME from your plant list</h2>
+                            <h2 className='modal-secondary-warning'>You're about to remove this plant from your plant list</h2>
                         </div>
                         <div>
                             <button className='remove-plant-btn' onClick={props.removeFromList}>Remove</button>
