@@ -119,7 +119,7 @@ class PlantListComponent extends React.Component
             })
         })
         this.closeModal();
-        message.success(plant + " has been added to your Collection!");
+        message.success(plant.common_name + " has been added to your Collection!");
     }
 
 
