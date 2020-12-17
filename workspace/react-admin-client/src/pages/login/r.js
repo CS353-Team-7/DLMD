@@ -44,12 +44,12 @@ class  RegistrationForm extends Component{
         fire.auth().createUserWithEmailAndPassword(v.email,v.password).then((u)=>{
             var user =v.email.split(".")[0];
             fire.database().ref('userinformation/' + user).set({
-                address:  'null',
-                age: 'null',
-                favorite:'null',
-                introduction:'null',
-                remark:'null',
-                telephone:'null'
+                address:  ' ',
+                age: ' ',
+                favorite:' ',
+                introduction:' ',
+                nationality:' ',
+                telephone:' ',
 
             });
             message.success(v.email+" Create success!")

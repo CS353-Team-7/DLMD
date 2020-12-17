@@ -55,7 +55,7 @@ export default class Homepage extends Component{
                 <div className="box">
                     <img src={calendar}/>
                         <h3>See your calendar</h3>
-                        <p>Your selected plants will be automatically added to a calendar that will create a waterinmg and care scheduule for each individual plant.</p>
+                        <p>Your selected plants will be automatically added to a calendar that will create a watering and care schedule for each individual plant.</p>
                 </div>
                 <div className="box">
                     <img src={check}/>

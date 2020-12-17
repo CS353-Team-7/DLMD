@@ -110,7 +110,7 @@ export  class PersonalInformation extends Component{
                 <Descriptions title=" &nbsp;  &nbsp; &nbsp;User Info" bordered>
                     <Descriptions.Item label="UserName">{user.username}</Descriptions.Item>
                     <Descriptions.Item label="Telephone">{this.state.list.telephone}</Descriptions.Item>
-                    <Descriptions.Item label="Remark">{this.state.list.remark}</Descriptions.Item>
+                    <Descriptions.Item label="nationality">{this.state.list.nationality}</Descriptions.Item>
                     <Descriptions.Item label="Address" span={2}>
                         {this.state.list.address}
                     </Descriptions.Item>

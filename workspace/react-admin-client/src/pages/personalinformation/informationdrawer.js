@@ -78,15 +78,15 @@ export  default  class DrawerForm extends React.Component {
             var  vage =  (values.age === undefined ? this.state.list.age:values.age)
             var vfavorite = (values.favorite === undefined ? this.state.list.favorite:values.favorite)
             var vintr = (values.introduction === undefined ? this.state.list.introduction:values.introduction)
-            var vremark = (values.remark === undefined ? this.state.list.remark:values.remark)
+            var vnationality = (values.nationality === undefined ? this.state.list.nationality:values.nationality)
             var vtelephone = (values.telephone === undefined ? this.state.list.telephone:values.telephone)
-            console.log(vaddress+" "+vage+" "+vfavorite+" "+vintr+" "+vremark+" "+vtelephone)
+            console.log(vaddress+" "+vage+" "+vfavorite+" "+vintr+" "+vnationality+" "+vtelephone)
             fire.database().ref('userinformation/' + user).set({
                 address:  vaddress,
                 age: vage,
                 favorite:vfavorite,
                 introduction:vintr,
-                remark:vremark,
+                nationality:vnationality,
                 telephone:vtelephone
 
             });
@@ -127,8 +127,8 @@ export  default  class DrawerForm extends React.Component {
                         <Form.Item name={'favorite'} label="Favorite">
                             <Input defaultValue={this.state.list.favorite}/>
                         </Form.Item>
-                        <Form.Item name={ 'remark'} label="Remark">
-                            <Input.TextArea defaultValue={this.state.list.remark}/>
+                        <Form.Item name={ 'nationality'} label="Nationality">
+                            <Input.TextArea defaultValue={this.state.list.nationality}/>
                         </Form.Item>
                         <Form.Item name={'introduction'} label="Introduction">
                             <Input.TextArea defaultValue={this.state.list.introduction}/>
