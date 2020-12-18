@@ -1,2 +1,2 @@
 # DLMD
-Don't let me die 
+The final project files are in the workspace
